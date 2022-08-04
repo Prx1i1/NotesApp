@@ -46,11 +46,13 @@ export class FetchData extends Component {
 
     return (
       <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
+        <h1 id="tabelLabel" >My Notes</h1>
+        <p>All notes stored online</p>
+        <div style={{flex:3, flexDirection: "row", flexWrap: "wrap"}}>
+            {contents}
+        </div>
       </div>
-    );
+      );
   }
 
   async populateWeatherData() {

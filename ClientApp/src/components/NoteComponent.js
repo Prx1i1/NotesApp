@@ -7,7 +7,7 @@ class NoteComponent extends Component {
     }
     render() {
         return (
-            <div style={{flex:1, flexDirection: "column", padding: 3, borderStyle: "dashed", borderColor: "black", borderWidth: "1px"}} >
+            <div style={{width: "auto",flex:1, flexDirection: "column", padding: 3, borderStyle: "dashed", borderColor: "black", borderWidth: "1px", marginBottom: 3}} >
                 <div style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
                 <div>{this.props.content}</div>
                 <div style={{textAlign: "right" }}>{this.props.date }</div>
