@@ -14,7 +14,11 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />
-  }
+   },
+   {
+       path: '/edit-data',
+       element: <EditData/>
+   }
 ];
 
 export default AppRoutes;

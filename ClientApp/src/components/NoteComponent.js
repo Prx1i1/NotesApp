@@ -8,16 +8,12 @@ class NoteComponent extends Component {
 
     handleClick() {
         console.log(this.props)
-        this.setState({mode: this.props.mode})
-        if (this.state.mode == "view") {
+        if (!this.props.mode) {
             console.log("View")
-        }
-        if (this.state.mode == "delete") {
+        } else { 
             this.props.onClick()
         }
-        if (this.state.mode == "edit") {
 
-        }
     }
 
     render() {

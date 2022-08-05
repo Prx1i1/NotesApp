@@ -7,7 +7,7 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: "view", restart: 0 };
+      this.state = { forecasts: [], loading: true, mode: true, restart: 0 };
       //this.deleteNote = this.deleteNote.bind(this)
       //this.handleChangeMode = this.handleChangeMode(this)
   }
@@ -25,14 +25,17 @@ export class FetchData extends Component {
     }
 
     async handleChangeMode() {
-        if (this.state.mode === "view") {
-            this.setState({ mode: "delete" })
-        } else {
-            this.setState({mode: "view"})
-        }
 
+        this.setState({mode: !this.state.mode})
         console.log(this.state.mode)
 
+    }
+
+    async handleCreateNote() {
+        let body = {"title" : "title", "content": "content", "date" : "today(i will do it later)"}
+        const addnote = await fetch('api/Notes', { headers: { "Content-Type": "application/json" },  method: "POST", body: JSON.stringify(body)})
+        console.log(addnote)
+        this.populateNotesData()
     }
 
   render() {
@@ -46,7 +49,8 @@ export class FetchData extends Component {
         <div onClick={null}>
         <h1 id="tabelLabel" >My Notes</h1>
             <p>All notes stored online</p>
-            <p onClick={ () => this.handleChangeMode() }>Current mode: { mode==="view"? "delete" : "view" }</p>
+            <p onClick={() => this.handleChangeMode()}>Current mode: {mode? "delete" : "view"}</p>
+            <button onClick={() => this.handleCreateNote() }>Create New Note</button>
         <div style={{flex:3, flexDirection: "row", flexWrap: "wrap"}}>
             {contents}
         </div>
