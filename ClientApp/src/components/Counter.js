@@ -9,13 +9,14 @@ export class Counter extends Component {
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 
-  incrementCounter() {
+  async incrementCounter() {
     this.setState({
       currentCount: this.state.currentCount + 1
     });
   }
 
-  render() {
+    render() {
+      console.log(this.incrementCounter)
     return (
       <div>
         <h1>Counter</h1>
