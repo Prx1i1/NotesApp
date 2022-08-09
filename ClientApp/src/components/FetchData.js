@@ -73,7 +73,7 @@ export class FetchData extends Component {
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
               <button onClick={() => this.handleCreateNote()}>Create New Note</button>
-                  <button style={{position: "absolute" ,right: "5%"}} onClick={()=> this.handleChangeMode() }>*trash icon here*</button>
+              <button style={{float: "right"}} onClick={()=> this.handleChangeMode() }>*trash icon here*</button>
             </div>
         <div style={{ flex: 3, flexDirection: "row", flexWrap: "wrap" }}>
             {contents}
