@@ -70,9 +70,12 @@ export class FetchData extends Component {
            {currentPopup}
         <h1 id="tabelLabel" >My Notes</h1>
             <p>All notes stored online</p>
-            <p onClick={() => this.handleChangeMode()}>Current mode: {mode? "delete" : "view"}</p>
-            <button onClick={() => this.handleCreateNote() }>Create New Note</button>
-        <div style={{flex:3, flexDirection: "row", flexWrap: "wrap"}}>
+            <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
+            <div>
+              <button onClick={() => this.handleCreateNote()}>Create New Note</button>
+                  <button style={{position: "absolute" ,right: "5%"}} onClick={()=> this.handleChangeMode() }>*trash icon here*</button>
+            </div>
+        <div style={{ flex: 3, flexDirection: "row", flexWrap: "wrap" }}>
             {contents}
         </div>
       </div>

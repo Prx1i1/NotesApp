@@ -1,4 +1,13 @@
 /* Provide sufficient contrast against white background */
+@font-face {
+    font-family: "Quicksand";
+    src: local('Quicksand'), url(./fonts/Quicksand-Regular.ttf);
+}
+
+body, *{
+    font-family: Quicksand;
+}
+
 a {
   color: #0366d6;
 }
@@ -12,3 +21,4 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
