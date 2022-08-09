@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NoteComponent from "./NoteComponent";
-import EditData from "./EditData"
+import EditData from "./EditData";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -73,7 +75,7 @@ export class FetchData extends Component {
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
               <button onClick={() => this.handleCreateNote()}>Create New Note</button>
-              <button style={{float: "right"}} onClick={()=> this.handleChangeMode() }>*trash icon here*</button>
+                  <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={faCoffee} /></button>
             </div>
         <div style={{ flex: 3, flexDirection: "row", flexWrap: "wrap" }}>
             {contents}
