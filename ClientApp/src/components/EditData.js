@@ -25,8 +25,10 @@ export const EditData = (props) => {
 
     return (
         //add black opacity screen behind
-
-        <div hidden={!props.visibility} className="popup" style={{ padding: 0 , position: "absolute", backgroundColor: "#B2BEB5", width: "70%", height: "80%", margin: "auto", left: "calc((100% - 70%) / 2)" }}>
+        <>
+            <div hidden={ !props.visibility} className="blackPage" style={{ opacity: 0.5, width: "100%", height: "100%", backgroundColor: "black", position: "absolute", top: 0, left: 0 }}>
+        </div>
+        <div hidden={!props.visibility} className="popup" style={{opacity: 1 ,padding: 0 , position: "absolute", backgroundColor: "#B2BEB5", width: "70%", height: "80%", margin: "auto", left: "calc((100% - 70%) / 2)" }}>
 
             <div style={{ marginTop: 5}} ref={ refTitle } contentEditable className="title"> {props.title}</div>
 
@@ -44,6 +46,7 @@ export const EditData = (props) => {
             </div>
 
         </div>
+        </>
         
         )
 }
