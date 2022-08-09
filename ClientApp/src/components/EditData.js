@@ -24,19 +24,23 @@ export const EditData = (props) => {
     }
 
     return (
-        
+        //add black opacity screen behind
 
-        <div hidden={ !props.visibility } className="popup" style={{ position: "absolute", backgroundColor: "#B2BEB5", width: "70%", height: "60%", margin: "auto" }}>
+        <div hidden={!props.visibility} className="popup" style={{ padding: 0 , position: "absolute", backgroundColor: "#B2BEB5", width: "70%", height: "80%", margin: "auto", left: "calc((100% - 70%) / 2)" }}>
 
-            <div ref={ refTitle } contentEditable className="title"> {props.title}</div>
-        
+            <div style={{ marginTop: 5}} ref={ refTitle } contentEditable className="title"> {props.title}</div>
+
+            <hr />
+
             <div ref={refContent} contentEditable className="content">{props.content}</div>
-            
+
+            <hr />
+
             <div ref={refDate} contentEditable className="date"> {props.date}</div>
 
-            <div style={{ width: "100%",display: "block" , position: "absolute", bottom : "0px" }}>
-                <button onClick={() => handleEdit() }>Update</button>
-                <button onClick={() => props.clearPopup() }>Cancel</button>
+            <div style={{ width: "100%", position: "absolute", bottom : "0px" }}>
+                <button style={{ width: "50%"}} onClick={() => handleEdit() }>Update</button>
+                <button style={{ width: "50%"}} onClick={() => props.clearPopup() }>Cancel</button>
             </div>
 
         </div>

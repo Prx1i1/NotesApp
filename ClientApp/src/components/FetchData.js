@@ -61,6 +61,7 @@ export class FetchData extends Component {
       : this.renderForecastsTable(this.state.forecasts);
 
     let mode = this.state.mode
+
       let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate}
           visibility={this.state.popupId != undefined && this.state.popupId != null ? true : false} clearPopup={this.clearPopupData} restartData={ this.clearPopupUpdate }/>
 
@@ -85,10 +86,6 @@ export class FetchData extends Component {
       console.log(data)
         this.setState({ forecasts: data, loading: false });
    }
-
-  async addNewNotes() {
-
-    }
 
     async deleteNote(id) {
         console.log("clicked")
