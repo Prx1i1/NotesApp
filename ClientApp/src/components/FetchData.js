@@ -78,9 +78,9 @@ export class FetchData extends Component {
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
               <button onClick={() => this.handleCreateNote()}>Create New Note</button>
-                  <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode?faTrash:faX} /></button>
+                  <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></button>
             </div>
-        <div style={{ flex: 6, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
+        <div style={{ flex: 1, flexDirection: "column", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
             {contents}
         </div>
       </div>
