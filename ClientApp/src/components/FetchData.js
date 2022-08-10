@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faTrash, faX } from '@fortawesome/free-solid-svg-icons'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: true, restart: 0 };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0 };
       //this.deleteNote = this.deleteNote.bind(this)
       //this.handleChangeMode = this.handleChangeMode(this)
   }
@@ -22,7 +22,7 @@ export class FetchData extends Component {
 
     renderForecastsTable(forecasts) {
         return (
-            forecasts.map(note => (<NoteComponent key={note.id} id={ note.id } title={note.title} content={note.content} date={note.date}
+            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete }
                 onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData } />))
     );
     }
@@ -47,6 +47,7 @@ export class FetchData extends Component {
     }
 
     clearPopupUpdate = () => {
+        this.setState({loading: true})
         this.populateNotesData()
     }
 
@@ -68,16 +69,18 @@ export class FetchData extends Component {
           visibility={this.state.popupId != undefined && this.state.popupId != null ? true : false} clearPopup={this.clearPopupData} restartData={ this.clearPopupUpdate }/>
 
       return (
-        <div>
+
+          <div>
+              <style>{mode? "body { background-color: red; }" : null}</style>
            {currentPopup}
         <h1 id="tabelLabel" >My Notes</h1>
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
               <button onClick={() => this.handleCreateNote()}>Create New Note</button>
-                  <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={faCoffee} /></button>
+                  <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode?faTrash:faX} /></button>
             </div>
-        <div style={{ flex: 3, flexDirection: "row", flexWrap: "wrap" }}>
+        <div style={{ flex: 2, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
             {contents}
         </div>
       </div>
