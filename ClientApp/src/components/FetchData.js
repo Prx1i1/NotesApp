@@ -80,7 +80,7 @@ export class FetchData extends Component {
               <button onClick={() => this.handleCreateNote()}>Create New Note</button>
                   <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode?faTrash:faX} /></button>
             </div>
-        <div style={{ flex: 2, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
+        <div style={{ flex: 6, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
             {contents}
         </div>
       </div>
