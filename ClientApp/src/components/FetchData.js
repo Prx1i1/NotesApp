@@ -110,9 +110,6 @@ export class FetchData extends Component {
 
     //wire this function to onclick in component
     async deleteNoteComplex(id, toDeleteCurrent) {
-        if (toDeleteCurrent == null) {
-            toDeleteCurrent = true
-        }
         let body = { "id": id, "toDelete": toDeleteCurrent }
         console.log("body", body)
         //fetch here

@@ -75,6 +75,9 @@ namespace NotesProject.Controllers
             if (noteDB == null) { return BadRequest("Target resource not found"); }
 
             //update parameters of note
+            if (noteDB.ToDelete == null) {
+                noteDB.ToDelete = false;
+            }
             noteDB.ToDelete = !noteDB.ToDelete;
 
             await _context.SaveChangesAsync();
