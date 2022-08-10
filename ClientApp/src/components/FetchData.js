@@ -22,8 +22,8 @@ export class FetchData extends Component {
 
     renderForecastsTable(forecasts) {
         return (
-            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete }
-                onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData } />))
+            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete}
+                onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion) } />))
     );
     }
 
@@ -66,7 +66,7 @@ export class FetchData extends Component {
     let mode = this.state.mode
 
       let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate}
-          visibility={this.state.popupId != undefined && this.state.popupId != null ? true : false} clearPopup={this.clearPopupData} restartData={ this.clearPopupUpdate }/>
+          visibility={this.state.popupId !== undefined && this.state.popupId !== null ? true : false} clearPopup={this.clearPopupData} restartData={ this.clearPopupUpdate }/>
 
       return (
 
@@ -99,11 +99,34 @@ export class FetchData extends Component {
         console.log("clicked")
         const deletion = await fetch('api/Notes/' + id, { headers: { "Content-Type": "application/json" }, method: "delete" })
         console.log(deletion)
+        this.setState({ loading: true })
+
         const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" } });
         console.log(response)
         const data = await response.json();
         console.log(data)
         this.setState({ forecasts: data, loading: false });
+    }
+
+    //wire this function to onclick in component
+    async deleteNoteComplex(id, toDeleteCurrent) {
+        if (toDeleteCurrent == null) {
+            toDeleteCurrent = true
+        }
+        let body = { "id": id, "toDelete": toDeleteCurrent }
+        console.log("body", body)
+        //fetch here
+        const complexDelete = await fetch('api/Notes/delete', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
+        console.log(complexDelete)
+        this.setState({loading: true})
+
+        const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" } });
+        console.log(response)
+        const data = await response.json();
+        console.log(data)
+        this.setState({ forecasts: data, loading: false });
+
+        
     }
 
 

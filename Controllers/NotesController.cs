@@ -67,7 +67,7 @@ namespace NotesProject.Controllers
             return Ok(await _context.Notes.ToListAsync());
         }
 
-        [HttpPut("delete/{id}", Name = "complexDeletion")]
+        [HttpPut("delete", Name = "complexDeletion")]
 
         public async Task<ActionResult<List<Note>>> UpdateNoteDelete(Note request)
         {
@@ -75,7 +75,7 @@ namespace NotesProject.Controllers
             if (noteDB == null) { return BadRequest("Target resource not found"); }
 
             //update parameters of note
-            noteDB.ToDelete = request.ToDelete;
+            noteDB.ToDelete = !noteDB.ToDelete;
 
             await _context.SaveChangesAsync();
 
