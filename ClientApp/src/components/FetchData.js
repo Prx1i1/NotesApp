@@ -79,7 +79,7 @@ export class FetchData extends Component {
             <div>
                   <button onClick={() => this.handleCreateNote()}>Create New Note</button>
                   <button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>
-                  <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></button>
+                  <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></button>
                   <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/></button>
             </div>
         <div style={{ flex: 1, flexDirection: "column", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
