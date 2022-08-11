@@ -31,11 +31,11 @@ class NoteComponent extends Component {
 
         return (
             <div
-                style={{ width: "auto", flex: 1, padding: 3, borderStyle: "dashed", borderColor: "black", borderWidth: "3px", marginBottom: 3, backgroundColor: deletionTag, minWidth: this.props.minWidth }}
+                style={{marginLeft: "2px", marginRight: "2px" ,width: "auto", flex: 1, padding: 3, borderStyle: "dashed", borderColor: "black", borderWidth: "3px", marginBottom: 3, backgroundColor: deletionTag, minWidth: this.props.minWidth }}
                 onClick={() => this.handleClick()}
             >
                 <div style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
-                <div >{this.props.content}</div>
+                <div>{this.props.content}</div>
                 <div style={{textAlign: "right" }}>{this.props.date }</div>
             </div>    
         )
