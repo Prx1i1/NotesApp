@@ -78,9 +78,10 @@ export class FetchData extends Component {
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
                   <button onClick={() => this.handleCreateNote()}>Create New Note</button>
+                  <button onClick={() => this.handleChangeLayout(this.state.minWidth) } style={{marginLeft: "5px" } }>Change Layout</button>
                   <button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>
-                  <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></button>
-                  <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/></button>
+                  <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
+                  <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>
             </div>
         <div style={{display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
             {contents}
@@ -88,6 +89,14 @@ export class FetchData extends Component {
       </div>
       );
   }
+
+    async handleChangeLayout(layoutValue) {
+        if (layoutValue == "33%") {
+            this.setState({ minWidth: "100%" })
+        } else {
+            this.setState({ minWidth: "33%"})
+        }
+    }
 
     async handleDeleteMode(mode) {
         if (mode == "temporary") {
