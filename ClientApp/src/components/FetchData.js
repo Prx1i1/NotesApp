@@ -9,7 +9,7 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "33%" };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "33%", layout: 2 };
       //this.deleteNote = this.deleteNote.bind(this)
       //this.handleChangeMode = this.handleChangeMode(this)
   }
@@ -78,7 +78,7 @@ export class FetchData extends Component {
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
                   <button onClick={() => this.handleCreateNote()}>Create New Note</button>
-                  <button onClick={() => this.handleChangeLayout(this.state.minWidth) } style={{marginLeft: "5px" } }>Change Layout</button>
+                  <button onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
                   <button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>
                   <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
                   <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>
@@ -88,13 +88,26 @@ export class FetchData extends Component {
         </div>
       </div>
       );
-  }
+    }
+
+    
 
     async handleChangeLayout(layoutValue) {
-        if (layoutValue == "33%") {
+        if (layoutValue == "10%") {
+            this.setState({ minWidth: "22%" })
+            this.setState({ layout: 1})
+        } else if (layoutValue == "22%") {
+            this.setState({ minWidth: "33%" })
+            this.setState({ layout: 2 })
+        } else if (layoutValue == "33%") {
+            this.setState({ minWidth: "45%" })
+            this.setState({ layout: 3 })
+        } else if (layoutValue == "45%") {
             this.setState({ minWidth: "100%" })
+            this.setState({ layout: 4 })
         } else {
-            this.setState({ minWidth: "33%"})
+            this.setState({ minWidth: "10%" })
+            this.setState({ layout: 0 })
         }
     }
 
