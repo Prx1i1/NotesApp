@@ -40,7 +40,7 @@ class NoteComponent extends Component {
                 onClick={() => this.handleClick()}
             >
                 <div style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
-                <div>{this.props.content}</div>
+                <div style={{ wordWrap: "break-word"} }>{this.props.content}</div>
                 <div style={{ textAlign: "right" }}>{this.props.date }</div>
             </div>    
         )
