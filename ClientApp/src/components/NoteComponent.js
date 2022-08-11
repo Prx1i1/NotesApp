@@ -31,7 +31,7 @@ class NoteComponent extends Component {
 
         return (
             <div
-                style={{ width: "auto", flex: 1, padding: 3, borderStyle: "dashed", borderColor: "black", borderWidth: "3px", marginBottom: 3, backgroundColor: deletionTag }}
+                style={{ width: "auto", flex: 1, padding: 3, borderStyle: "dashed", borderColor: "black", borderWidth: "3px", marginBottom: 3, backgroundColor: deletionTag, minWidth: this.props.minWidth }}
                 onClick={() => this.handleClick()}
             >
                 <div style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
