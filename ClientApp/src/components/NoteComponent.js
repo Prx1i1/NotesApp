@@ -23,7 +23,7 @@ class NoteComponent extends Component {
 
     render() {
 
-        let deletionTag = this.state.toDeletion? "red" : "green"
+        let deletionTag = this.state.toDeletion? "red" : "lightgray"
 
         return (
             <div

@@ -52,7 +52,7 @@ export class FetchData extends Component {
     }
 
     async handleCreateNote() {
-        let body = {"title" : "title", "content": "content", "date" : "today(i will do it later)"}
+        let body = {"title" : "title", "content": "content", "date" : "today(i will do it later)", "toDelete" : false}
         const addnote = await fetch('api/Notes', { headers: { "Content-Type": "application/json" },  method: "POST", body: JSON.stringify(body)})
         console.log(addnote)
         this.populateNotesData()
@@ -77,7 +77,8 @@ export class FetchData extends Component {
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
-              <button onClick={() => this.handleCreateNote()}>Create New Note</button>
+                  <button onClick={() => this.handleCreateNote()}>Create New Note</button>
+                  {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay()}>Change display</button>*/}
                   <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></button>
             </div>
         <div style={{ flex: 1, flexDirection: "column", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
@@ -87,8 +88,22 @@ export class FetchData extends Component {
       );
   }
 
-  async populateNotesData() {
-      const response = await fetch('api/Notes/', { headers: {"Content-Type" : "application/json"} });
+    async handleChangeDisplay() {
+        if (this.state.display == "deleted") {
+            this.setState({ display: "default" })
+        } else {
+            this.setState({ display: "deleted" })
+        }
+
+        await this.populateNotesData()
+    }
+
+    async populateNotesData() {
+
+    console.log("fetching data", this.state.display)
+
+      let displayMode = "default"
+      const response = await fetch('api/Notes/' + displayMode, { headers: {"Content-Type" : "application/json"} });
       console.log(response)
       const data = await response.json();
       console.log(data)
@@ -101,11 +116,7 @@ export class FetchData extends Component {
         console.log(deletion)
         this.setState({ loading: true })
 
-        const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" } });
-        console.log(response)
-        const data = await response.json();
-        console.log(data)
-        this.setState({ forecasts: data, loading: false });
+        await this.populateNotesData()
     }
 
     //wire this function to onclick in component
@@ -117,14 +128,8 @@ export class FetchData extends Component {
         console.log(complexDelete)
         this.setState({loading: true})
 
-        const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" } });
-        console.log(response)
-        const data = await response.json();
-        console.log(data)
-        this.setState({ forecasts: data, loading: false });
-
+        await this.populateNotesData()
         
     }
-
 
 }

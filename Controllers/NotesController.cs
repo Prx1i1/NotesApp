@@ -13,20 +13,30 @@ namespace NotesProject.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "getAll")]
-        public async Task<ActionResult<List<Note>>> Get()
+        [HttpGet("{mode}", Name = "getAll")]
+        public async Task<ActionResult<List<Note>>> Get(string mode)
         {
-            return Ok(await _context.Notes.ToListAsync());  
+
+            var returnedData = await _context.Notes.ToListAsync();
+
+            if (mode == "default"){
+                returnedData = returnedData.FindAll(n => n.ToDelete == false);
+                
+            }
+            else {
+                returnedData = returnedData.FindAll(n => n.ToDelete != false);
+            }
+            return Ok(returnedData);  
         }
 
-        [HttpGet("{id}", Name = "getOne")]
-        public async Task<ActionResult<Note>> Get(int id)
-        {
-            //var note = notes[id];
-            var note = await _context.Notes.FindAsync(id);
-            if (note == null) { return BadRequest("Not found."); }
-            return Ok(note);
-        }
+        //[HttpGet("{id}", Name = "getOne")]
+        //public async Task<ActionResult<Note>> Get(int id)
+        //{
+        //    //var note = notes[id];
+        //    var note = await _context.Notes.FindAsync(id);
+        //    if (note == null) { return BadRequest("Not found."); }
+        //    return Ok(note);
+        //}
 
         [HttpPost(Name = "addOne")]
 
