@@ -14,9 +14,13 @@ class NoteComponent extends Component {
 
             this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date)
 
-        } else { 
-            //this.props.onClick() // this is perma deletion
-            this.props.onClickComplex()
+        } else {
+            if (this.props.deleteMode === "temporary") {
+                //this.props.onClick() // this is perma deletion
+                this.props.onClickComplex()
+            } else {
+                this.props.onClick()
+            }
         }
 
     }

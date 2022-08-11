@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faTrash, faX } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faTrash, faX, faTrashArrowUp, faBan } from '@fortawesome/free-solid-svg-icons'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: false, restart: 0 };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary" };
       //this.deleteNote = this.deleteNote.bind(this)
       //this.handleChangeMode = this.handleChangeMode(this)
   }
@@ -22,7 +22,7 @@ export class FetchData extends Component {
 
     renderForecastsTable(forecasts) {
         return (
-            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete}
+            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode }
                 onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion) } />))
     );
     }
@@ -71,15 +71,16 @@ export class FetchData extends Component {
       return (
 
           <div>
-              <style>{mode? "body { background-color: red; }" : null}</style>
+              <style>{mode ? "body { background-color: red; }" : "body { background-color: #ff9933; }"}</style>
            {currentPopup}
         <h1 id="tabelLabel" >My Notes</h1>
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
                   <button onClick={() => this.handleCreateNote()}>Create New Note</button>
-                  {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay()}>Change display</button>*/}
+                  <button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>
                   <button style={{ float: "right" }} onClick={() => this.handleChangeMode()}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></button>
+                  <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/></button>
             </div>
         <div style={{ flex: 1, flexDirection: "column", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4 }}>
             {contents}
@@ -88,21 +89,32 @@ export class FetchData extends Component {
       );
   }
 
-    async handleChangeDisplay() {
-        if (this.state.display == "deleted") {
+    async handleDeleteMode(mode) {
+        if (mode == "temporary") {
+            this.setState({ deleteMode: "pernament" })
+        } else {
+            this.setState({ deleteMode: "temporary" })
+        }
+    }
+
+    async handleChangeDisplay(display) {
+
+        console.log("data display", display)
+
+        if (display == "deleted") {
             this.setState({ display: "default" })
         } else {
             this.setState({ display: "deleted" })
         }
 
+        await this.setState({loading: true})
         await this.populateNotesData()
     }
-
     async populateNotesData() {
 
     console.log("fetching data", this.state.display)
 
-      let displayMode = "default"
+      let displayMode = this.state.display
       const response = await fetch('api/Notes/' + displayMode, { headers: {"Content-Type" : "application/json"} });
       console.log(response)
       const data = await response.json();
