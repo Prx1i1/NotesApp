@@ -93,7 +93,7 @@ export class FetchData extends Component {
     
 
     async handleChangeLayout(layoutValue) {
-        if (layoutValue == "10%") {
+        if (layoutValue == "15%") {
             this.setState({ minWidth: "22%" })
             this.setState({ layout: 1})
         } else if (layoutValue == "22%") {
@@ -106,7 +106,7 @@ export class FetchData extends Component {
             this.setState({ minWidth: "100%" })
             this.setState({ layout: 4 })
         } else {
-            this.setState({ minWidth: "10%" })
+            this.setState({ minWidth: "15%" })
             this.setState({ layout: 0 })
         }
     }
