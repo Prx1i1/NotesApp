@@ -43,6 +43,10 @@ namespace NotesProject.Controllers
         public async Task<ActionResult<List<Note>>> AddNote(Note note)
         {
             // note.Date = currentDates
+            //if(note.Title == null && note.Content == null)
+            //{
+            //    return Ok("must not be null");
+            //}
             _context.Notes.Add(note);
             await _context.SaveChangesAsync();
             return Ok(await _context.Notes.ToListAsync());
