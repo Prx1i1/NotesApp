@@ -93,10 +93,10 @@ export const Trash = () => {
             <div>
                 {currentPopup}
             </div>
-            <div>
-                <button onClick={() => (changeMode(false))}>*view*</button>
-                <button onClick={() => (changeMode(true), setDeleteMode("permanent"))} >*delete*</button>
-                <button onClick={() => (changeMode(true), setDeleteMode("temporary"))} >*restore*</button>
+            <div style={{ display: "flex", flex: 1, width: "100%"} }>
+                <button style={{flex: 1}} onClick={() => (changeMode(false))}>*view*</button>
+                <button style={{flex: 1}} onClick={() => (changeMode(true), setDeleteMode("permanent"))} >*delete*</button>
+                <button style={{flex: 1}} onClick={() => (changeMode(true), setDeleteMode("temporary"))} >*restore*</button>
             </div>
             <div style={{ display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around", marginTop: 4, padding: 0 }}>
                 {contents}
