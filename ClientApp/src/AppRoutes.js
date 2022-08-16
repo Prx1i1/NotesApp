@@ -1,7 +1,7 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import { EditData } from "./components/EditData"
+import { Trash } from './components/Trash';
 
 const AppRoutes = [
   {
@@ -17,8 +17,8 @@ const AppRoutes = [
     element: <FetchData />
    },
    {
-       path: '/edit-data',
-       element: <EditData/>
+       path: '/trash',
+       element: <Trash/>
    }
 ];
 

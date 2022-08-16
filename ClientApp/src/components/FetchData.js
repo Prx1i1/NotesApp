@@ -3,6 +3,7 @@ import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faTrash, faX, faTrashArrowUp, faBan } from '@fortawesome/free-solid-svg-icons'
+import { Route, Routes } from 'react-router-dom';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -20,7 +21,7 @@ export class FetchData extends Component {
 
 
 
-    renderForecastsTable(forecasts) {
+    renderNotesTable(forecasts) {
         return (
             forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode}
                 onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion)} minWidth= {this.state.minWidth } />))
@@ -61,7 +62,7 @@ export class FetchData extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : this.renderForecastsTable(this.state.forecasts);
+      : this.renderNotesTable(this.state.forecasts);
 
     let mode = this.state.mode
 
@@ -79,7 +80,8 @@ export class FetchData extends Component {
             <div>
                   <button onClick={() => this.handleCreateNote()}>Create New Note</button>
                   <button onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
-                  <button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>
+                  {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>*/}
+                  <a href="./trash"><button>Trash</button></a>
                   <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
                   <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>
             </div>

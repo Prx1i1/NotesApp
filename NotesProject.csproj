@@ -35,8 +35,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\fonts\" />
-    <Folder Include="ClientApp\src\Nowy folder\" />
-    <Folder Include="Nowy folder\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
