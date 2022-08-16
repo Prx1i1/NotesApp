@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 //wyświetl jedną notatkę (get id), contenteditable = true, dodatkowe przyciski wracajace na poprzednią podstrone (bonus punkty za komponent funkcyjny)
 
 export const EditData = (props) => {
@@ -30,15 +30,15 @@ export const EditData = (props) => {
         </div>
         <div hidden={!props.visibility} className="popup" style={{opacity: 1 ,padding: 0 , position: "fixed", backgroundColor: "#B2BEB5", width: "70%", height: "80%", margin: "auto", left: "calc((100% - 70%) / 2)" }}>
 
-            <div style={{ marginTop: 5}} ref={ refTitle } contentEditable className="title"> {props.title}</div>
+                <div style={{ marginTop: 5 }} ref={refTitle} contentEditable suppressContentEditableWarning={true} className="title"> {props.title}</div>
 
             <hr />
 
-            <div ref={refContent} contentEditable className="content">{props.content}</div>
+                <div ref={refContent} contentEditable suppressContentEditableWarning={true}  className="content">{props.content}</div>
 
             <hr />
 
-            <div ref={refDate} contentEditable className="date"> {props.date}</div>
+                <div ref={refDate} contentEditable suppressContentEditableWarning={true} className="date"> {props.date}</div>
 
             <div style={{ width: "100%", position: "absolute", bottom : "0px" }}>
                 <button style={{ width: "50%"}} onClick={() => handleEdit() }>Update</button>
