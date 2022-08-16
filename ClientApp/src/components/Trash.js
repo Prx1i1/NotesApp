@@ -1,5 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import NoteComponent from "./NoteComponent";
+import EditData from "./EditData"
 
 export const Trash = () => {
 
@@ -10,6 +11,12 @@ export const Trash = () => {
     const [minWidth, setMinWidth] = useState("30%")
     const [deleteMode, setDeleteMode] = useState("temporary")
 
+    //popupId: id, popupTitle: title, popupContent: content, popupDate
+    const [popupId, setPopupId] = useState(null)
+    const [popupTitle, setPopupTitle] = useState(null)
+    const [popupContent, setPopupContent] = useState(null)
+    const [popupDate, setPopupDate] = useState(null)
+
     useEffect(() => {
         populateNotesData()
     }, [])
@@ -18,8 +25,22 @@ export const Trash = () => {
 
     }
 
-    function storePopupData() {
+    function storePopupData(id, title, content, date) {
+        setPopupId(id)
+        setPopupTitle(title)
+        setPopupContent(content)
+        setPopupDate(date)
+    }
+    function clearPopupData(){
+        setPopupId(null)
+        setPopupTitle(null)
+        setPopupContent(null)
+        setPopupDate(null)
+    }
 
+    function clearPopupUpdate(){
+        setLoadingState(true)
+        populateNotesData()
     }
 
     function deleteNoteComplex(id, toDeletion) {
@@ -47,13 +68,21 @@ export const Trash = () => {
         renderNotesTable()
     }
 
+    let currentPopup = <EditData id={popupId} title={popupTitle} content={popupContent} date={popupDate}
+        visibility={popupId !== undefined && popupId !== null ? true : false} clearPopup={clearPopupData} restartData={clearPopupUpdate} />
     let contents = loading ? <p>Loading...</p> : renderNotesTable()
 
     return (
+        <div>
+            <div>
+                {currentPopup}
+            </div>
 
-        <div style={{ display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around", marginTop: 4, padding: 0 }}>
-            {contents}
+            <div style={{ display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around", marginTop: 4, padding: 0 }}>
+                {contents}
+            </div>
+            
         </div>
-        )
+    )
 }
 export default Trash
