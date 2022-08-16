@@ -42,6 +42,7 @@ namespace NotesProject.Controllers
 
         public async Task<ActionResult<List<Note>>> AddNote(Note note)
         {
+            // note.Date = currentDates
             _context.Notes.Add(note);
             await _context.SaveChangesAsync();
             return Ok(await _context.Notes.ToListAsync());
@@ -57,7 +58,7 @@ namespace NotesProject.Controllers
             //update parameters of note
             noteDB.Title = request.Title;
             noteDB.Content = request.Content;
-            noteDB.Date = request.Date;
+            noteDB.Date = request.Date; //or CurrentDate
 
             await _context.SaveChangesAsync();
 
