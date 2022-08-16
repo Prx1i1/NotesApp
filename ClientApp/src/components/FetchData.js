@@ -53,7 +53,7 @@ export class FetchData extends Component {
     }
 
     async handleCreateNote() {
-        let body = {"title" : "title", "content": "content", "date" : "today(i will do it later)", "toDelete" : false}
+        let body = { "title": "title", "content": "content", "date": "2001-01-01T00:00:00", "toDelete" : false}
         const addnote = await fetch('api/Notes', { headers: { "Content-Type": "application/json" },  method: "POST", body: JSON.stringify(body)})
         console.log(addnote)
         this.populateNotesData()

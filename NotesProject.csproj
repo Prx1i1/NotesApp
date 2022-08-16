@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Class.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ClientApp\src\fonts\" />
   </ItemGroup>
 
