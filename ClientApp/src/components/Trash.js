@@ -21,8 +21,13 @@ export const Trash = () => {
         populateNotesData()
     }, [])
 
-    function deleteNote(id) {
+    async function deleteNote(id) {
+        console.log("clicked")
+        const deletion = await fetch('api/Notes/' + id, { headers: { "Content-Type": "application/json" }, method: "delete" })
+        console.log(deletion)
+        setLoadingState(true)
 
+        await populateNotesData()
     }
 
     function storePopupData(id, title, content, date) {
@@ -43,8 +48,19 @@ export const Trash = () => {
         populateNotesData()
     }
 
-    function deleteNoteComplex(id, toDeletion) {
+    async function deleteNoteComplex(id, toDeleteCurrent) {
+       
+            let body = { "id": id, "toDelete": toDeleteCurrent }
+            console.log("body", body)
+            //fetch here
+            const complexDelete = await fetch('api/Notes/delete', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
+            console.log(complexDelete)
 
+            setLoadingState(true)
+
+            await populateNotesData()
+
+        
     }
 
     function renderNotesTable() {
@@ -77,7 +93,11 @@ export const Trash = () => {
             <div>
                 {currentPopup}
             </div>
-
+            <div>
+                <button onClick={() => (changeMode(false))}>*view*</button>
+                <button onClick={() => (changeMode(true), setDeleteMode("permanent"))} >*delete*</button>
+                <button onClick={() => (changeMode(true), setDeleteMode("temporary"))} >*restore*</button>
+            </div>
             <div style={{ display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around", marginTop: 4, padding: 0 }}>
                 {contents}
             </div>
