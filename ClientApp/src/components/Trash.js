@@ -1,6 +1,8 @@
 ﻿import React, { useEffect, useState } from 'react';
 import NoteComponent from "./NoteComponent";
-import EditData from "./EditData"
+import EditData from "./EditData";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faTrash, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 export const Trash = () => {
 
@@ -11,6 +13,7 @@ export const Trash = () => {
     const [minWidth, setMinWidth] = useState("30%")
     const [deleteMode, setDeleteMode] = useState("temporary")
 
+    const [buttonsControll, setButtonControll] = useState(0)
     //popupId: id, popupTitle: title, popupContent: content, popupDate
     const [popupId, setPopupId] = useState(null)
     const [popupTitle, setPopupTitle] = useState(null)
@@ -94,9 +97,9 @@ export const Trash = () => {
                 {currentPopup}
             </div>
             <div style={{ display: "flex", flex: 1, width: "100%"} }>
-                <button style={{flex: 1}} onClick={() => (changeMode(false))}>*view*</button>
-                <button style={{flex: 1}} onClick={() => (changeMode(true), setDeleteMode("permanent"))} >*delete*</button>
-                <button style={{flex: 1}} onClick={() => (changeMode(true), setDeleteMode("temporary"))} >*restore*</button>
+                <button style={{ flex: buttonsControll == 0 ? 2 : 1 }} onClick={() => (changeMode(false), setButtonControll(0))}><FontAwesomeIcon icon={ faPenToSquare }></FontAwesomeIcon></button>
+                <button style={{ flex: buttonsControll == 1 ? 2 : 1 }} onClick={() => (changeMode(true), setDeleteMode("permanent"), setButtonControll(1))} ><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
+                <button style={{ flex: buttonsControll == 2 ? 2 : 1 }} onClick={() => (changeMode(true), setDeleteMode("temporary"), setButtonControll(2))} ><FontAwesomeIcon icon={faTrashArrowUp}></FontAwesomeIcon></button>
             </div>
             <div style={{ display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around", marginTop: 4, padding: 0 }}>
                 {contents}
