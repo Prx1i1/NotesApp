@@ -14,7 +14,7 @@ export const Trash = () => {
     const [deleteMode, setDeleteMode] = useState("temporary")
 
     const [buttonsControll, setButtonControll] = useState(0)
-    //popupId: id, popupTitle: title, popupContent: content, popupDate
+
     const [popupId, setPopupId] = useState(null)
     const [popupTitle, setPopupTitle] = useState(null)
     const [popupContent, setPopupContent] = useState(null)
