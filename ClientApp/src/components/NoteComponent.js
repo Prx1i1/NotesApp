@@ -28,7 +28,7 @@ class NoteComponent extends Component {
     }
 
     handleDateFormat() {
-        let timeframes = this.props.date.split("T") // [0]: hr, [1]: date
+        let timeframes = this.props.date.split("T") 
         let time = timeframes[1]
         let date = timeframes[0]
 
