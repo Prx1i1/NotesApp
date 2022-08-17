@@ -60,9 +60,9 @@ export const EditData = (props) => {
 
                         <div ref={refDate} className="date"> {props.date}</div>
 
-                        <div style={{ width: "100%", position: "absolute", bottom: "0px" }}>
-                            <button style={{ width: "50%" }} onClick={() => handleEdit()}>Update</button>
-                            <button style={{ width: "50%" }} onClick={() => props.clearPopup()}>Cancel</button>
+                        <div style={{ width: "100%", position: "absolute", bottom: "0px", display: "flex", flex: 1 }}>
+                            <button style={{ flex: 1 }} onClick={() => handleEdit()}>Update</button>
+                            <button style={{ flex: 1 }} onClick={() => props.clearPopup()}>Cancel</button>
                         </div>
 
                     </div>
