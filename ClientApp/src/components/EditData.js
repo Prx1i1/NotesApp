@@ -3,6 +3,11 @@
 
 export const EditData = (props) => {
 
+
+    useEffect(() => { 
+        console.log("component loaded")
+        }, [])
+
     const refTitle = React.useRef();
     const refContent = React.useRef();
     const refDate = React.useRef();
@@ -35,6 +40,7 @@ export const EditData = (props) => {
 
         props.restartData()
         props.clearPopup()
+
     }
 
     return (
