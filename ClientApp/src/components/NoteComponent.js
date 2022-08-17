@@ -27,6 +27,20 @@ class NoteComponent extends Component {
 
     }
 
+    handleDateFormat() {
+        let timeframes = this.props.date.split("T") // [0]: hr, [1]: date
+        let time = timeframes[1]
+        let date = timeframes[0]
+
+        time = time.split(":")
+        time = time[0] + ":" + time[1]
+
+        date = date.split("-")
+        date = date[2] + "." + date[1] + "." + date[0]
+
+        return(time + " " + date)
+    }
+
     render() {
 
         let deletionTag = this.state.toDeletion? "red" : "lightgray"
@@ -41,7 +55,7 @@ class NoteComponent extends Component {
             >
                 <div style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
                 <div style={{ wordWrap: "break-word"} }>{this.props.content}</div>
-                <div style={{ textAlign: "right" }}>{this.props.date }</div>
+                <div style={{ textAlign: "right" }}>{this.handleDateFormat()}</div>
             </div>    
         )
     }
