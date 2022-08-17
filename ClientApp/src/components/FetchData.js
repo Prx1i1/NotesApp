@@ -3,7 +3,6 @@ import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faTrash, faX, faTrashArrowUp, faBan } from '@fortawesome/free-solid-svg-icons'
-import { Route, Routes } from 'react-router-dom';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -52,6 +51,10 @@ export class FetchData extends Component {
         this.populateNotesData()
     }
 
+    createNotePopup() {
+        this.setState({ popupId: "new"})
+    }
+
     async handleCreateNote() {
         let body = { "title": null, "content": null, "date": null, "toDelete" : false}
         const addnote = await fetch('api/Notes', { headers: { "Content-Type": "application/json" },  method: "POST", body: JSON.stringify(body)})
@@ -78,7 +81,7 @@ export class FetchData extends Component {
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
-                  <button onClick={() => this.handleCreateNote()}>Create New Note</button>
+                  <button onClick={() => this.createNotePopup()}>Create New Note</button>
                   <button onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
                   {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>*/}
                   <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>

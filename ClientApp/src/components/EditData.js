@@ -8,10 +8,24 @@ export const EditData = (props) => {
     const refDate = React.useRef();
 
     async function handleEdit() {
-        let body = { id: props.id, title: refTitle.current?.innerText, content: refContent.current?.innerText, date: refDate.current?.innerText }
-        console.log(body)
-        const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
-        console.log(response)
+
+        if (props.title == null && props.content == null) {
+            console.log("incorrect")
+        }
+
+        if (props.id == "new") {
+             console.log("creator")
+            let body = { title: refTitle.current?.innerText, content: refContent.current?.innerText, toDelete: false }
+            const response = await fetch('api/Notes', { headers: { "Content-Type": "application/json" }, method: "POST", body: JSON.stringify(body) })
+            console.log(response)
+
+        } else {
+            console.log("editor")
+            let body = { id: props.id, title: refTitle.current?.innerText, content: refContent.current?.innerText, date: refDate.current?.innerText }
+            console.log(body)
+            const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
+            console.log(response)
+        }
 
         await cleanPopup()
 
@@ -38,7 +52,7 @@ export const EditData = (props) => {
 
             <hr />
 
-                <div ref={refDate} contentEditable suppressContentEditableWarning={true} className="date"> {props.date}</div>
+                <div ref={refDate} className="date"> {props.date}</div>
 
             <div style={{ width: "100%", position: "absolute", bottom : "0px" }}>
                 <button style={{ width: "50%"}} onClick={() => handleEdit() }>Update</button>

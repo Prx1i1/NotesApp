@@ -42,14 +42,12 @@ namespace NotesProject.Controllers
 
         public async Task<ActionResult<List<Note>>> AddNote(Note note)
         {
-            // note.Date = currentDates
-            //if(note.Title == null && note.Content == null)
-            //{
-            //    return Ok("must not be null");
-            //}
+
+            note.Date = DateTime.Now;
             _context.Notes.Add(note);
             await _context.SaveChangesAsync();
             return Ok(await _context.Notes.ToListAsync());
+
         }
 
         [HttpPut(Name = "editOne")]
@@ -62,7 +60,7 @@ namespace NotesProject.Controllers
             //update parameters of note
             noteDB.Title = request.Title;
             noteDB.Content = request.Content;
-            noteDB.Date = request.Date; //or CurrentDate
+            noteDB.Date = DateTime.Now;
 
             await _context.SaveChangesAsync();
 
