@@ -19,6 +19,7 @@ export const Trash = () => {
     const [popupTitle, setPopupTitle] = useState(null)
     const [popupContent, setPopupContent] = useState(null)
     const [popupDate, setPopupDate] = useState(null)
+    const [popupToDelete, setPopupDelete] = useState(null)
 
     useEffect(() => {
         populateNotesData()
@@ -33,17 +34,19 @@ export const Trash = () => {
         await populateNotesData()
     }
 
-    function storePopupData(id, title, content, date) {
+    function storePopupData(id, title, content, date, toDelete) {
         setPopupId(id)
         setPopupTitle(title)
         setPopupContent(content)
         setPopupDate(date)
+        setPopupDelete(toDelete)
     }
     function clearPopupData(){
         setPopupId(null)
         setPopupTitle(null)
         setPopupContent(null)
         setPopupDate(null)
+        setPopupDelete(null)
     }
 
     function clearPopupUpdate(){
@@ -87,7 +90,7 @@ export const Trash = () => {
         renderNotesTable()
     }
 
-    let currentPopup = <EditData id={popupId} title={popupTitle} content={popupContent} date={popupDate}
+    let currentPopup = <EditData id={popupId} title={popupTitle} content={popupContent} date={popupDate} toDelete={popupToDelete} deleteThisNote={() => (deleteNoteComplex(popupId, popupToDelete)) }
         visibility={popupId !== undefined && popupId !== null ? true : false} clearPopup={clearPopupData} restartData={clearPopupUpdate} />
     let contents = loading ? <p>Loading...</p> : renderNotesTable()
 
