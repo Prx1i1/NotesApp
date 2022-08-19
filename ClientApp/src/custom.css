@@ -6,6 +6,7 @@
 
 body, *{
     font-family: Quicksand;
+    border-radius: 2px;
 }
 
 a {

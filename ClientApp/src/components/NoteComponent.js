@@ -14,7 +14,7 @@ class NoteComponent extends Component {
             console.log("View")
             this.setState({ selected: true })
 
-            this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date)
+            this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date, this.state.toDeletion)
 
         } else {
             if (this.props.deleteMode === "temporary") {
