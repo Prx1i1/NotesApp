@@ -43,19 +43,19 @@ class NoteComponent extends Component {
 
     render() {
 
-        let deletionTag = this.state.toDeletion? "red" : "lightgray"
+        //let deletionTag = this.state.toDeletion? "red" : "lightgray"
 
         return (
             <div
+                className={"note"}
                 style={{
-                    marginLeft: "2px", marginRight: "2px", width: "auto", flex: 1, padding: 3, borderStyle: "solid", borderColor: "grey",
-                    borderWidth: "5px", marginBottom: 4, backgroundColor: deletionTag, minWidth: this.props.minWidth
+                    width: "auto", flex: 1, minWidth: this.props.minWidth
                 }}
                 onClick={() => this.handleClick()}
             >
-                <div style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
-                <div style={{ wordWrap: "break-word"} }>{this.props.content}</div>
-                <div style={{ textAlign: "right" }}>{this.handleDateFormat()}</div>
+                <div className={"notePartTitle", "notePart"} style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
+                <div className={"notePartContent", "notePart"} style={{ wordWrap: "break-word"} }>{this.props.content}</div>
+                <div className={"notePartDate", "notePart"} style={{ textAlign: "right" }}>{this.handleDateFormat()}</div>
             </div>    
         )
     }
