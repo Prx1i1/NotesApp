@@ -15,21 +15,6 @@ class NoteComponent extends Component {
 
             this.props.select()
 
-            let isInArray = false
-
-            for (let i = 0; i < this.props.allSelectedNotes.length; i++) {
-                console.log("pog")
-                if (this.state.id === this.props.allSelectedNotes[i]) {
-                    isInArray = true
-                    this.setState({ selected: true })
-                    console.log("found selection")
-                }
-            }
-
-            if (!isInArray) {
-                this.setState({ selected: false })
-            }
-
 
         } else { 
 
@@ -73,7 +58,7 @@ class NoteComponent extends Component {
             <div
                 className={"note"}
                 style={{
-                    width: "auto", flex: 1, minWidth: this.props.minWidth, backgroundColor: this.state.selected? "black" : "white"
+                    width: "auto", flex: 1, minWidth: this.props.minWidth, backgroundColor: this.props.isSelected()? "black" : "white"
                 }}
                 onClick={() => this.handleClick()}
             >

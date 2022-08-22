@@ -24,8 +24,23 @@ export class FetchData extends Component {
         return (
             forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode}
                 onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion)} minWidth={this.state.minWidth}
-                selectionMode={this.state.selectionMode} select={() => this.handleSelectNote(note.id)} allSelectedNotes={ this.state.selectedNotes} />))
+                selectionMode={this.state.selectionMode} select={() => this.handleSelectNote(note.id)} allSelectedNotes={this.state.selectedNotes} isSelected={() => this.isSelected(note.id) } />))
     );
+    }
+
+    isSelected(id) {
+
+        let alreadyInArray = false
+
+        for (let i = 0; i < this.state.selectedNotes.length; i++) {
+            if (this.state.selectedNotes[i] == id) {
+                console.log("found id in array")
+                alreadyInArray = true
+
+            }
+        }
+
+        return alreadyInArray
     }
 
     toggleNotesSelection() {
