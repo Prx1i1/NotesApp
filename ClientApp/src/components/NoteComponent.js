@@ -58,10 +58,11 @@ class NoteComponent extends Component {
             <div
                 className={"note"}
                 style={{
-                    width: "auto", flex: 1, minWidth: this.props.minWidth, backgroundColor: this.props.isSelected()? "black" : "white"
+                    /*position: "relative",*/ width: "auto", flex: 1, minWidth: this.props.minWidth, backgroundColor: this.props.isSelected()? "black" : "white"
                 }}
                 onClick={() => this.handleClick()}
             >
+                <div className="checkbox" style={{position: "absolute" ,top: 1, right: 1 }}>{this.props.isSelected()? "T" : "L"}</div>
                 <div className={"notePartTitle", "notePart"} style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
                 <div className={"notePartContent", "notePart"} style={{ wordWrap: "break-word"} }>{this.props.content}</div>
                 <div className={"notePartDate", "notePart"} style={{ textAlign: "right" }}>{this.handleDateFormat()}</div>

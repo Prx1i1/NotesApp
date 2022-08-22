@@ -1,7 +1,7 @@
 /* Provide sufficient contrast against white background */
 :root {
     --primary-color: white;
-    background-color: #ff9933;
+    background-color: white;
 }
 
 
@@ -37,9 +37,9 @@ button {
 
 .note {
     border-radius: 2px;
-    background-color:  var(--primary-color);
+    background-color:  white;
     border: none;
-    box-shadow: 2px 2px 5px 3px var(--primary-color);
+    box-shadow: 2px 2px 8px 3px gray;
     margin: 5px 5px;
     padding: 2px;
 }
@@ -80,6 +80,13 @@ button {
 .popup div{
     border-radius: 0;
     margin: 10px 10px;
+}
+
+.checkbox{
+    border: 1px solid black;
+    border-radius: 0;
+    width: 20px;
+    height: 20px;
 }
 
 

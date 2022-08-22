@@ -21,9 +21,60 @@ export const Trash = () => {
     const [popupDate, setPopupDate] = useState(null)
     const [popupToDelete, setPopupDelete] = useState(null)
 
+    const [selectedNotes, setSelectedNotes] = useState([])
+    const [selectionMode, setSelectionMode] = useState("default")
+
     useEffect(() => {
         populateNotesData()
     }, [])
+
+    function isSelected(id) {
+
+        let alreadyInArray = false
+
+        for (let i = 0; i < selectedNotes.length; i++) {
+            if (selectedNotes[i] == id) {
+                console.log("found id in array")
+                alreadyInArray = true
+
+            }
+        }
+
+        return alreadyInArray
+    }
+
+    function toggleNotesSelection() {
+        if (selectionMode == "default") {
+            setSelectionMode("select")
+        } else {
+            setSelectionMode("default")
+            setSelectedNotes([])
+        }
+    }
+
+    async function handleSelectNote(id) {
+
+        let alreadyInArray = false
+        let placeInArray = null
+        for (let i = 0; i < selectedNotes.length; i++) {
+            if (selectedNotes[i] == id) {
+                console.log("found id in array")
+                alreadyInArray = true
+                placeInArray = i
+            }
+        }
+
+        if (alreadyInArray == true) {
+            let tempNotesArray = selectedNotes
+            tempNotesArray.splice(placeInArray, 1)
+            await setSelectedNotes(tempNotesArray)
+        } else {
+            await setSelectedNotes([...selectedNotes, id])
+        }
+
+        console.log(selectedNotes)
+
+    }
 
     async function deleteNote(id) {
         console.log("clicked")
@@ -72,7 +123,8 @@ export const Trash = () => {
     function renderNotesTable() {
         return (
             forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={deleteMode}
-                onClick={() => deleteNote(note.id)} mode={mode} storePopup={storePopupData} onClickComplex={() => deleteNoteComplex(note.id, note.toDeletion)} minWidth={minWidth} />))
+                onClick={() => deleteNote(note.id)} mode={mode} storePopup={storePopupData} onClickComplex={() => deleteNoteComplex(note.id, note.toDeletion)} minWidth={minWidth}
+                selectionMode={selectionMode} select={() => handleSelectNote(note.id)} allSelectedNotes={selectedNotes} isSelected={() => isSelected(note.id)}            />))
         );
     }
 

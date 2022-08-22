@@ -125,7 +125,7 @@ export class FetchData extends Component {
       return (
 
           <div>
-              <style>{mode ? ":root { background-color: red; }" : "body { background-color: #ff9933; }"}</style>
+              <style>{mode ? ":root { background-color: red; }" : "body { background-color: inherit; }"}</style>
            {currentPopup}
             <h1>My Notes</h1>
             <p>All notes stored online</p>

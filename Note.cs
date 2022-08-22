@@ -8,8 +8,8 @@
 
         public string? Content { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
-        public bool? ToDelete { get; set; }
+        public bool ToDelete { get; set; }
     }
 }
