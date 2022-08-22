@@ -85,8 +85,9 @@ button {
 .checkbox{
     border: 1px solid black;
     border-radius: 0;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
 
 }
 
