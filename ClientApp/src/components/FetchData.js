@@ -9,7 +9,7 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2 };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2, selectedNotes: [], selectionMode: "default" };
       //this.deleteNote = this.deleteNote.bind(this)
       //this.handleChangeMode = this.handleChangeMode(this)
   }
@@ -23,8 +23,42 @@ export class FetchData extends Component {
     renderNotesTable(forecasts) {
         return (
             forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode}
-                onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion)} minWidth= {this.state.minWidth } />))
+                onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion)} minWidth={this.state.minWidth}
+                selectionMode={this.state.selectionMode} select={() => this.handleSelectNote(note.id)} allSelectedNotes={ this.state.selectedNotes} />))
     );
+    }
+
+    toggleNotesSelection() {
+        if (this.state.selectionMode == "default") {
+            this.setState({ selectionMode: "select" })
+        } else {
+            this.setState({ selectionMode: "default" })
+            this.setState({ selectedNotes: []})
+        }
+    }
+
+    async handleSelectNote(id) {
+
+        let alreadyInArray = false
+        let placeInArray = null
+        for (let i = 0; i < this.state.selectedNotes.length; i++) {
+            if (this.state.selectedNotes[i] == id) {
+                console.log("found id in array")
+                alreadyInArray = true
+                placeInArray = i
+            }
+        }
+
+        if (alreadyInArray == true) {
+            let tempNotesArray = this.state.selectedNotes
+            tempNotesArray.splice(placeInArray, 1)
+            await this.setState({ selectedNotes: tempNotesArray })
+        } else {
+            await this.setState({ selectedNotes: [...this.state.selectedNotes, id] })
+        }
+
+        console.log(this.state.selectedNotes)
+
     }
 
     async handleChangeMode() {
@@ -76,17 +110,19 @@ export class FetchData extends Component {
       return (
 
           <div>
-              <style>{mode ? "body { background-color: red; }" : "body { background-color: #ff9933; }"}</style>
+              <style>{mode ? ":root { background-color: red; }" : "body { background-color: #ff9933; }"}</style>
            {currentPopup}
-        <h1 id="tabelLabel" >My Notes</h1>
+            <h1>My Notes</h1>
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>
                   <button onClick={() => this.createNotePopup()}>Create New Note</button>
                   <button onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
                   {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>*/}
+                  
                   <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
-                 {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
+                  <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.toggleNotesSelection() }>Select</button>
+                  {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
             </div>
         <div style={{display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4, padding: 0 }}>
             {contents}

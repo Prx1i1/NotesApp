@@ -6,22 +6,46 @@ class NoteComponent extends Component {
         this.state = { id: props.id, title: props.title, content: props.content, date: props.date, mode: props.mode, toDeletion: props.toDeletion, selected: false }
     }
 
+
     handleClick() {
 
+        console.log(this.props.selectionMode)
 
-        console.log(this.props)
-        if (!this.props.mode) {
-            console.log("View")
-            this.setState({ selected: true })
+        if (this.props.selectionMode == "select") {
 
-            this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date, this.state.toDeletion)
+            this.props.select()
 
-        } else {
-            if (this.props.deleteMode === "temporary") {
-                //this.props.onClick() // this is perma deletion
-                this.props.onClickComplex()
+            let isInArray = false
+
+            for (let i = 0; i < this.props.allSelectedNotes.length; i++) {
+                console.log("pog")
+                if (this.state.id === this.props.allSelectedNotes[i]) {
+                    isInArray = true
+                    this.setState({ selected: true })
+                    console.log("found selection")
+                }
+            }
+
+            if (!isInArray) {
+                this.setState({ selected: false })
+            }
+
+
+        } else { 
+
+            console.log(this.props)
+            if (!this.props.mode) {
+                console.log("View")
+
+                this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date, this.state.toDeletion)
+
             } else {
-                this.props.onClick()
+                if (this.props.deleteMode === "temporary") {
+                    //this.props.onClick() // this is perma deletion
+                    this.props.onClickComplex()
+                } else {
+                    this.props.onClick()
+                }
             }
         }
 
@@ -49,7 +73,7 @@ class NoteComponent extends Component {
             <div
                 className={"note"}
                 style={{
-                    width: "auto", flex: 1, minWidth: this.props.minWidth
+                    width: "auto", flex: 1, minWidth: this.props.minWidth, backgroundColor: this.state.selected? "black" : "white"
                 }}
                 onClick={() => this.handleClick()}
             >

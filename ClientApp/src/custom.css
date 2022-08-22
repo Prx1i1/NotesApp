@@ -1,7 +1,7 @@
 /* Provide sufficient contrast against white background */
 :root {
     --primary-color: white;
-    background-color: orange;
+    background-color: #ff9933;
 }
 
 
@@ -78,7 +78,8 @@ button {
     border-radius: 9px;
 }
 .popup div{
-    border-radius: 15px;
+    border-radius: 0;
+    margin: 10px 10px;
 }
 
 
