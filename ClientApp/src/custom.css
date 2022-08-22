@@ -1,6 +1,7 @@
 /* Provide sufficient contrast against white background */
 :root {
     --primary-color: white;
+    background-color: orange;
 }
 
 
@@ -12,7 +13,7 @@
 body, *{
     font-family: Quicksand;
     border-radius: 3px;
-    background-color: orange;
+    background-color: inherit;
 }
 
 a {
@@ -21,6 +22,11 @@ a {
 
 code {
   color: #E01A76;
+}
+
+button {
+    border-radius: 10px;
+    background: transparent;
 }
 
 .btn-primary {
@@ -54,9 +60,25 @@ code {
     border-bottom-right-radius: 3px;
 }
 
-button {
-    border-radius: 10px;
-    background: transparent;
+.buttonLeft {
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.buttonCenter{
+    border-radius: 0;
+}
+.buttonRight {
+    border-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.popup{
+    border-radius: 15px;
+}
+.popup div{
+    border-radius: 15px;
 }
 
 

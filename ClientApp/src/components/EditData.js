@@ -66,10 +66,10 @@ export const EditData = (props) => {
                         <div ref={refDate} className="date"> {props.date}</div>
 
                         <div style={{ width: "100%", position: "absolute", bottom: "0px", display: "flex", flex: 1 }}>
-                            <button style={{ flex: 1 }} onClick={() => handleEdit()}>Update</button>
-                            <button style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>
-                            {props.toDelete ? <button style={{ flex: 1 }}>Remove</button> : null}
-                            <button style={{ flex: 1 }} onClick={() => props.clearPopup()}>Cancel</button>
+                            <button className="buttonLeft" style={{ flex: 1 }} onClick={() => handleEdit()}>Update</button>
+                            <button className="buttonCenter" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>
+                            {props.toDelete ? <button className="buttonCenter" style={{ flex: 1 }}>Remove</button> : null}
+                            <button className="buttonRight" style={{ flex: 1 }} onClick={() => props.clearPopup()}>Cancel</button>
                     
                         </div>
 

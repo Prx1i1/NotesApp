@@ -99,10 +99,10 @@ export const Trash = () => {
             <div>
                 {currentPopup}
             </div>
-            <div style={{ display: "flex", flex: 1, width: "100%"} }>
-                <button style={{ flex: buttonsControll == 0 ? 2 : 1 }} onClick={() => (changeMode(false), setButtonControll(0))}><FontAwesomeIcon icon={ faPenToSquare }></FontAwesomeIcon></button>
-                <button style={{ flex: buttonsControll == 1 ? 2 : 1 }} onClick={() => (changeMode(true), setDeleteMode("permanent"), setButtonControll(1))} ><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
-                <button style={{ flex: buttonsControll == 2 ? 2 : 1 }} onClick={() => (changeMode(true), setDeleteMode("temporary"), setButtonControll(2))} ><FontAwesomeIcon icon={faTrashArrowUp}></FontAwesomeIcon></button>
+            <div className={"trashButtons"}  style={{ display: "flex", flex: 1, width: "100%"} }>
+                <button className="buttonLeft" style={{ flex: buttonsControll == 0 ? 2 : 1 }} onClick={() => (changeMode(false), setButtonControll(0))}><FontAwesomeIcon icon={ faPenToSquare }></FontAwesomeIcon></button>
+                <button className="buttonCenter" style={{ flex: buttonsControll == 1 ? 2 : 1 }} onClick={() => (changeMode(true), setDeleteMode("permanent"), setButtonControll(1))} ><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
+                <button className="buttonRight" style={{ flex: buttonsControll == 2 ? 2 : 1 }} onClick={() => (changeMode(true), setDeleteMode("temporary"), setButtonControll(2))} ><FontAwesomeIcon icon={faTrashArrowUp}></FontAwesomeIcon></button>
             </div>
             <div style={{ display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around", marginTop: 4, padding: 0 }}>
                 {contents}
