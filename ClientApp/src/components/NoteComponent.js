@@ -1,4 +1,6 @@
 ﻿import react, { Component } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 class NoteComponent extends Component {
     constructor(props) {
@@ -58,12 +60,12 @@ class NoteComponent extends Component {
             <div
                 className={"note"}
                 style={{
-                    /*position: "relative",*/ width: "auto", flex: 1, minWidth: this.props.minWidth, backgroundColor: this.props.isSelected()? "black" : "white"
+                    width: "auto", flex: 1, minWidth: this.props.minWidth
                 }}
                 onClick={() => this.handleClick()}
             >
-                <div className="checkbox" style={{position: "absolute" ,top: 1, right: 1 }}>{this.props.isSelected()? "T" : "L"}</div>
-                <div className={"notePartTitle", "notePart"} style={{ textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
+                <div className={"notePartTitle", "notePart"} style={{ display: "inline-block", textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
+                {this.props.selectionMode == "select" ? <div className="checkbox" style={{ display: "inline-block", float: "right" }}>{this.props.isSelected() ? <FontAwesomeIcon icon={faCheck }></FontAwesomeIcon> : ""}</div> : null}
                 <div className={"notePartContent", "notePart"} style={{ wordWrap: "break-word"} }>{this.props.content}</div>
                 <div className={"notePartDate", "notePart"} style={{ textAlign: "right" }}>{this.handleDateFormat()}</div>
             </div>    
