@@ -39,8 +39,8 @@ button {
     border-radius: 2px;
     background-color:  var(--primary-color);
     border: none;
-    box-shadow: 1px 2px 3px 2px var(--primary-color);
-    margin: 4px 4px;
+    box-shadow: 2px 2px 5px 3px var(--primary-color);
+    margin: 5px 5px;
     padding: 2px;
 }
 .notePart {
@@ -75,7 +75,7 @@ button {
 }
 
 .popup{
-    border-radius: 15px;
+    border-radius: 9px;
 }
 .popup div{
     border-radius: 15px;

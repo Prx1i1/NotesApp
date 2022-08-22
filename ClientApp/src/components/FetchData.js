@@ -9,7 +9,7 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "33%", layout: 2 };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2 };
       //this.deleteNote = this.deleteNote.bind(this)
       //this.handleChangeMode = this.handleChangeMode(this)
   }
@@ -99,15 +99,15 @@ export class FetchData extends Component {
 
     async handleChangeLayout(layoutValue) {
         if (layoutValue == "15%") {
-            this.setState({ minWidth: "22%" })
+            this.setState({ minWidth: "20%" })
             this.setState({ layout: 1})
-        } else if (layoutValue == "22%") {
-            this.setState({ minWidth: "33%" })
+        } else if (layoutValue == "20%") {
+            this.setState({ minWidth: "30%" })
             this.setState({ layout: 2 })
-        } else if (layoutValue == "33%") {
-            this.setState({ minWidth: "45%" })
+        } else if (layoutValue == "30%") {
+            this.setState({ minWidth: "40%" })
             this.setState({ layout: 3 })
-        } else if (layoutValue == "45%") {
+        } else if (layoutValue == "40%") {
             this.setState({ minWidth: "100%" })
             this.setState({ layout: 4 })
         } else {
