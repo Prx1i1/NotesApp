@@ -22,6 +22,7 @@ namespace NotesProject.Controllers
             if (mode == "default"){
                 returnedData = returnedData.FindAll(n => n.ToDelete == false);
                 returnedData.Sort((a, b) => a.Date.CompareTo(b.Date));
+                returnedData.Reverse(); //new to old
                 
             }
             else {
