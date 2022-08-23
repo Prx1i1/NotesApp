@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faTrash, faX, faTrashArrowUp, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faTrash, faX, faTrashArrowUp, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -126,8 +126,10 @@ export class FetchData extends Component {
 
           <div>
               <style>{mode ? ":root { background-color: red; }" : "body { background-color: inherit; }"}</style>
-           {currentPopup}
-            <h1>My Notes</h1>
+              <button className="addNote" onClick={() => this.createNotePopup()}><FontAwesomeIcon style={{ position: 'relative', left: 10, bottom: 10, fontSize: 32}} icon={faPlus}></FontAwesomeIcon></button>
+              {currentPopup}
+              <div style={{ height: 12 }}></div> {/*this is margin*/}
+            <h1 >My Notes</h1>
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
             <div>

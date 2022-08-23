@@ -91,4 +91,13 @@ button {
 
 }
 
+.addNote {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 0 0 0 300px;
+    background-color: inherit;
+    right: 0;
+}
+
 
