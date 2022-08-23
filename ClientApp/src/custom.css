@@ -73,6 +73,17 @@ button {
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
 }
+.buttonClose {
+    border-bottom: none;
+}
+.buttonLeftClose{
+    border-top-left-radius: 0;
+    border-left: none;
+}
+.buttonRightClose{
+    border-top-right-radius: 0;
+    border-right: none;
+}
 
 .popup{
     border-radius: 9px;
