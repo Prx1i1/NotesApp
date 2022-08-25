@@ -84,8 +84,8 @@ namespace NotesProject.Controllers
             //update parameters of note
             noteDB.Title = request.Title;
             noteDB.Content = request.Content;
-            noteDB.Date = DateTime.Now;
-            noteDB.EditDate = request.Date;
+            noteDB.EditDate = DateTime.Now;
+            noteDB.Date = request.Date;
 
             await _context.SaveChangesAsync();
 

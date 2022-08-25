@@ -11,6 +11,7 @@ export const EditData = (props) => {
     const refTitle = React.useRef();
     const refContent = React.useRef();
     const refDate = React.useRef();
+    const refEditDate = React.useRef();
 
     async function handleEdit() {
 
@@ -66,10 +67,11 @@ export const EditData = (props) => {
                         <hr />
 
                         <div ref={refDate} className="date"> {props.date}</div>
+                        <div ref={refEditDate} className="date"> { props.editDate}</div>
 
                         <div style={{ width: "100%", margin: 0, position: "absolute", bottom: "0px", display: "flex", flex: 1, background: "transparent" }}>
-                        <button className="buttonLeft buttonLeftClose buttonClose" style={{ flex: 1 }} onClick={() => handleEdit()}>{props.id != "new" ? "Update" : "Add"}</button>
-                    { props.id != "new" ? <button className="buttonCenter buttonClose" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>: null}
+                            <button className="buttonLeft buttonLeftClose buttonClose" style={{ flex: 1 }} onClick={() => handleEdit()}>{props.id != "new" ? "Update" : "Add"}</button>
+                            { props.id != "new" ? <button className="buttonCenter buttonClose" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>: null}
                             {props.toDelete ? <button className="buttonCenter buttonClose" style={{ flex: 1 }}>Remove</button> : null}
                             <button className="buttonRight buttonRightClose buttonClose" style={{ flex: 1 }} onClick={() => props.clearPopup()}>Cancel</button>
                     

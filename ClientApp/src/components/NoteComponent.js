@@ -5,7 +5,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 class NoteComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = { id: props.id, title: props.title, content: props.content, date: props.date, mode: props.mode, toDeletion: props.toDeletion, selected: false }
+        this.state = { id: props.id, title: props.title, content: props.content, date: props.date, mode: props.mode, toDeletion: props.toDeletion, selected: false, editDate: props.editDate }
     }
 
 
@@ -24,7 +24,7 @@ class NoteComponent extends Component {
             if (!this.props.mode) {
                 console.log("View")
 
-                this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date, this.state.toDeletion)
+                this.props.storePopup(this.state.id, this.state.title, this.state.content, this.state.date, this.state.toDeletion, this.state.editDate)
 
             } else {
                 if (this.props.deleteMode === "temporary") {

@@ -122,7 +122,7 @@ export const Trash = () => {
 
     function renderNotesTable() {
         return (
-            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={deleteMode}
+            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} editDate={note.editDate} toDeletion={note.toDelete} deleteMode={deleteMode}
                 onClick={() => deleteNote(note.id)} mode={mode} storePopup={storePopupData} onClickComplex={() => deleteNoteComplex(note.id, note.toDeletion)} minWidth={minWidth}
                 selectionMode={selectionMode} select={() => handleSelectNote(note.id)} allSelectedNotes={selectedNotes} isSelected={() => isSelected(note.id)}            />))
         );

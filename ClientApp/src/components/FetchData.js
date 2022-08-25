@@ -23,7 +23,7 @@ export class FetchData extends Component {
 
     renderNotesTable(forecasts) {
         return (
-            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode}
+            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode} editDate={note.editDate }
                 onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion)} minWidth={this.state.minWidth}
                 selectionMode={this.state.selectionMode} select={() => this.handleSelectNote(note.id)} allSelectedNotes={this.state.selectedNotes} isSelected={() => this.isSelected(note.id) } />))
     );
@@ -84,14 +84,14 @@ export class FetchData extends Component {
 
     }
 
-    storePopupData = (id, title, content, date, toDelete) => {
-        this.setState({ popupId: id, popupTitle: title, popupContent: content, popupDate: date, popupToDelete: toDelete })
+    storePopupData = (id, title, content, date, toDelete, editDate) => {
+        this.setState({ popupId: id, popupTitle: title, popupContent: content, popupDate: date, popupToDelete: toDelete, popupEditDate: editDate })
 
         console.log(this.state)
     }
 
     clearPopupData = () => {
-        this.setState({ popupId: null, popupTitle: null, popupContent: null, popupDate: null, popupToDelete: null })
+        this.setState({ popupId: null, popupTitle: null, popupContent: null, popupDate: null, popupToDelete: null, popupEditDate: null })
 
         console.log(this.state)
     }
@@ -106,7 +106,7 @@ export class FetchData extends Component {
     }
 
     async handleCreateNote() {
-        let body = { "title": null, "content": null, "date": null, "toDelete" : false}
+        let body = { "title": null, "content": null, "date": null, "toDelete" : false, "editDate" : null}
         const addnote = await fetch('api/Notes', { headers: { "Content-Type": "application/json" },  method: "POST", body: JSON.stringify(body)})
         console.log(addnote)
         this.populateNotesData()
@@ -138,7 +138,7 @@ export class FetchData extends Component {
 
     let mode = this.state.mode
 
-      let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete}
+      let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate }
           visibility={this.state.popupId !== undefined && this.state.popupId !== null ? true : false} clearPopup={this.clearPopupData}
           restartData={this.clearPopupUpdate} deleteThisNote={() => this.deleteNoteComplex(this.state.popupId, this.state.popupToDelete)} />
 
