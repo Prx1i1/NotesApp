@@ -23,13 +23,13 @@ export const EditData = (props) => {
 
         if (props.id == "new") {
              console.log("creator")
-            let body = { title: refTitle.current?.innerText, content: refContent.current?.innerText, toDelete: false }
+            let body = { title: refTitle.current?.innerText, content: refContent.current?.innerText, toDelete: false, editDate: null }
             const response = await fetch('api/Notes', { headers: { "Content-Type": "application/json" }, method: "POST", body: JSON.stringify(body) })
             console.log(response)
 
         } else {
             console.log("editor")
-            let body = { id: props.id, title: refTitle.current?.innerText, content: refContent.current?.innerText, date: refDate.current?.innerText }
+            let body = { id: props.id, title: refTitle.current?.innerText, content: refContent.current?.innerText}
             console.log(body)
             const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
             console.log(response)
@@ -66,8 +66,8 @@ export const EditData = (props) => {
 
                         <hr />
 
-                <div ref={refDate} className="date">{props.id !== "new" ? "Creation date: " : null }{props.date}</div>
-                <div ref={refEditDate} className="date">{ props.editDate != null? "Last edit date:" : null} { props.editDate}</div>
+                        <div ref={refDate} className="date">{props.id !== "new" ? "Creation date: " : null }{props.date}</div>
+                        <div ref={refEditDate} className="date">{ props.editDate != null? "Last edit date:" : null} { props.editDate}</div>
 
                         <div style={{ width: "100%", margin: 0, position: "absolute", bottom: "0px", display: "flex", flex: 1, background: "transparent" }}>
                             <button className="buttonLeft buttonLeftClose buttonClose" style={{ flex: 1 }} onClick={() => handleEdit()}>{props.id != "new" ? "Update" : "Add"}</button>
