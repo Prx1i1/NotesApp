@@ -158,8 +158,9 @@ export class FetchData extends Component {
                   {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>*/}
                   <input style={{ flex: 1 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
                   <button style={{flex:1, float: "right" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
-                  <button style={{flex:1, float: "right" }} onClick={() => this.toggleNotesSelection()}>Select</button>
-                  {this.state.selectionMode == "select" ? <button style={{ float: "right", flex:1 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}>Delete Selected</button> : null}
+                  {this.state.selectionMode == "select" ? <button style={{ float: "right", flex: 1 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}>Delete Selected</button> : null}
+                  <button style={{ flex: 1, float: "right" }} onClick={() => this.toggleNotesSelection()}>Select</button>
+                  
                   {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
             </div>
         <div style={{display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4, padding: 0 }}>
