@@ -111,4 +111,8 @@ button {
     right: 0;
 }
 
+.mainButtons button, .mainButtons input {
+    margin: 0 5px;
+}
+
 

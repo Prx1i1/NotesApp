@@ -61,6 +61,10 @@ namespace NotesProject.Controllers
         {
 
             note.Date = DateTime.Now;
+            if(note.Title == null && note.Content == null)
+            {
+                return BadRequest("double null value");
+            }
             _context.Notes.Add(note);
             await _context.SaveChangesAsync();
             return Ok(await _context.Notes.ToListAsync());
@@ -73,7 +77,10 @@ namespace NotesProject.Controllers
         {
             var noteDB = await _context.Notes.FindAsync(request.Id);
             if (noteDB == null) { return BadRequest("Target resource not found"); }
-
+            if (request.Title == null && request.Content == null)
+            {
+                return BadRequest("double null values");
+            }
             //update parameters of note
             noteDB.Title = request.Title;
             noteDB.Content = request.Content;

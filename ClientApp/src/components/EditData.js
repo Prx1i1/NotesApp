@@ -16,6 +16,8 @@ export const EditData = (props) => {
 
         if (props.title == null && props.content == null) {
             console.log("incorrect")
+            //show warning if needed
+            return 0
         }
 
         if (props.id == "new") {
@@ -67,7 +69,7 @@ export const EditData = (props) => {
 
                         <div style={{ width: "100%", margin: 0, position: "absolute", bottom: "0px", display: "flex", flex: 1, background: "transparent" }}>
                             <button className="buttonLeft buttonLeftClose buttonClose" style={{ flex: 1 }} onClick={() => handleEdit()}>Update</button>
-                            <button className="buttonCenter buttonClose" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>
+                    { props.id != "new" ? <button className="buttonCenter buttonClose" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>: null}
                             {props.toDelete ? <button className="buttonCenter buttonClose" style={{ flex: 1 }}>Remove</button> : null}
                             <button className="buttonRight buttonRightClose buttonClose" style={{ flex: 1 }} onClick={() => props.clearPopup()}>Cancel</button>
                     
