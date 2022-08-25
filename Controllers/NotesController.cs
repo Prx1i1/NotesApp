@@ -36,7 +36,7 @@ namespace NotesProject.Controllers
         public async Task<ActionResult<List<Note>>> GetSearched (string mode, string text)
         {
             var returnedData = await _context.Notes.ToListAsync();
-            returnedData = returnedData.FindAll(n => n.Title.Contains(text) || n.Content.Contains(text));
+            returnedData = returnedData.FindAll(n => n.Title.ToLower().Contains(text.ToLower()) || n.Content.ToLower().Contains(text.ToLower()));
             bool modeDisplay = false;
             if(mode == "deleted")
             {
