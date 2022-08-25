@@ -3,6 +3,7 @@ import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faTrash, faX, faTrashArrowUp, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { timeout } from 'workbox-core/_private';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -111,6 +112,25 @@ export class FetchData extends Component {
         this.populateNotesData()
     }
 
+    async handleSearch(e) {
+        console.log(e.target.value)
+        this.setState({loading: true})
+
+        if (e.target.value.length != 0) {
+            this.handleSearchFetch(e.target.value)
+        } else {
+            this.populateNotesData()
+        }
+    }
+
+    async handleSearchFetch(text) {
+        const response = await fetch('/api/Notes/search/' + this.state.display + "/" + text, { headers: { "Content-Type" : "application/json" }, method: "GET"})
+        const data = await response.json();
+        console.log(data)
+        this.setState({ forecasts: data, loading: false });
+    }
+
+
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
@@ -132,14 +152,14 @@ export class FetchData extends Component {
             <h1 >My Notes</h1>
             <p>All notes stored online</p>
             <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
-            <div>
-                  <button onClick={() => this.createNotePopup()}>Create New Note</button>
-                  <button onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
+              <div style={{ display: "flex" } }>
+                  {/*<button style={{ flex: 1}} onClick={() => this.createNotePopup()}>Create New Note</button>*/}
+                  <button style={{ flex: 1 }} onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
                   {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>*/}
-                  
-                  <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
-                  <button style={{ float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.toggleNotesSelection()}>Select</button>
-                  {this.state.selectionMode == "select" ? <button style={{ float: "right" }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}>Delete Selected</button> : null}
+                  <input style={{ flex: 1 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
+                  <button style={{flex:1, float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
+                  <button style={{flex:1, float: "right", marginLeft: "5px", marginRight: "5px" }} onClick={() => this.toggleNotesSelection()}>Select</button>
+                  {this.state.selectionMode == "select" ? <button style={{ float: "right", flex:1 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}>Delete Selected</button> : null}
                   {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
             </div>
         <div style={{display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4, padding: 0 }}>

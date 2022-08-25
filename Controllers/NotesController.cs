@@ -31,6 +31,21 @@ namespace NotesProject.Controllers
             return Ok(returnedData);  
         }
 
+        [HttpGet("search/{mode}/{text}", Name = "getSearched")]
+
+        public async Task<ActionResult<List<Note>>> GetSearched (string mode, string text)
+        {
+            var returnedData = await _context.Notes.ToListAsync();
+            returnedData = returnedData.FindAll(n => n.Title.Contains(text) || n.Content.Contains(text));
+            bool modeDisplay = false;
+            if(mode == "deleted")
+            {
+                modeDisplay = true;
+            }
+            returnedData = returnedData.FindAll(n => n.ToDelete == modeDisplay);
+            return Ok(returnedData);
+        }
+
         //[HttpGet("{id}", Name = "getOne")]
         //public async Task<ActionResult<Note>> Get(int id)
         //{
