@@ -10,6 +10,8 @@
 
         public DateTime Date { get; set; }
 
+        public DateTime? EditDate { get; set; }
+
         public bool ToDelete { get; set; }
     }
 }

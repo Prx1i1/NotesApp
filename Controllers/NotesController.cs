@@ -85,6 +85,7 @@ namespace NotesProject.Controllers
             noteDB.Title = request.Title;
             noteDB.Content = request.Content;
             noteDB.Date = DateTime.Now;
+            noteDB.EditDate = request.Date;
 
             await _context.SaveChangesAsync();
 

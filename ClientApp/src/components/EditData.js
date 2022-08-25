@@ -14,7 +14,7 @@ export const EditData = (props) => {
 
     async function handleEdit() {
 
-        if (props.title == null && props.content == null) {
+        if (refTitle.current?.innerText.length == 0 && refContent.current?.innerText.length == 0) {
             console.log("incorrect")
             //show warning if needed
             return 0
