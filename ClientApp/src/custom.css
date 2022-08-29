@@ -111,13 +111,18 @@ button {
     right: 0;
 }
 .mainButtons{
+    display: block;
     width: 100%;
-    position: relative;
     padding: 2px;
+    border: 1px solid black;
 }
 
 .mainButtons input {
-    width: 100%;
+    width: 90%;
+    border: none;
+}
+.mainButtons input:focus{
+    outline: none;
 }
 .mainButtons button {
     border: none;

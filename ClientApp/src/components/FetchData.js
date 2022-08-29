@@ -143,7 +143,7 @@ export class FetchData extends Component {
       return (
 
           <div>
-              {this.props.isMenuVisible() ? <div className="sideBar" style={{ position: "absolute", left: 0, height: "100%", width: "30%"} }></div> : null}
+              
               
               <style>{mode ? ":root { background-color: red; }" : "body { background-color: inherit; }"}</style>
               <button className="addNote" onClick={() => this.createNotePopup()}><FontAwesomeIcon style={{ position: 'relative', left: 10, bottom: 10, fontSize: 32}} icon={faPlus}></FontAwesomeIcon></button>
@@ -157,16 +157,20 @@ export class FetchData extends Component {
                   {/*<button style={{ flex: 1 }} onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>*/}
                   <input style={{ flex: 2 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
                   {/*<button style={{flex:1, float: "right" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>*/}
-                  {this.state.selectionMode == "select" ? <button style={{ position: "absolute", right: 30, top: 4 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}><FontAwesomeIcon icon={faTrash }></FontAwesomeIcon></button> : null}
-                  <button style={{ position: "absolute", right: 4, top: 4 }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ?
+                  <button style={{right: 4, top: 4, float: "right" }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ?
                       <FontAwesomeIcon icon={faX}></FontAwesomeIcon> :
                       <FontAwesomeIcon icon={faHandPointer}></FontAwesomeIcon>}</button>
-                  
+                  {this.state.selectionMode == "select" ? <button style={{ float: "right" }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}><FontAwesomeIcon icon={faTrash }></FontAwesomeIcon></button> : null}
+
                   {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
             </div>
         <div style={{display: "flex", flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly", alignContent: "space-around",marginTop: 4, padding: 0 }}>
             {contents}
-        </div>
+              </div>
+
+              {this.props.isMenuVisible() ? <div className="sideBar" style={{ position: "absolute", left: 0, top: 50, height: "100%", width: "25%" }}>
+                Sidebar contents
+              </div> : null}
       </div>
       );
     }
