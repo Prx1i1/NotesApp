@@ -113,11 +113,14 @@ button {
 .mainButtons{
     width: 100%;
     position: relative;
-
+    padding: 2px;
 }
 
 .mainButtons input {
     width: 100%;
+}
+.mainButtons button {
+    border: none;
 }
 
 .sideBar{

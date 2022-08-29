@@ -152,13 +152,13 @@ export class FetchData extends Component {
             <h1 >My Notes</h1>
             <p>All your notes in one place</p>
 {/*            <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>*/}
-              <div className="mainButtons" style={{ }}>
+              <div className="mainButtons">
                   {/*<button style={{ flex: 1}} onClick={() => this.createNotePopup()}>Create New Note</button>*/}
                   {/*<button style={{ flex: 1 }} onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>*/}
                   <input style={{ flex: 2 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
                   {/*<button style={{flex:1, float: "right" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>*/}
-                  {this.state.selectionMode == "select" ? <button style={{ position: "absolute", right: 30 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}><FontAwesomeIcon icon={faTrash }></FontAwesomeIcon></button> : null}
-                  <button style={{ position: "absolute", right: 0 }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ?
+                  {this.state.selectionMode == "select" ? <button style={{ position: "absolute", right: 30, top: 4 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}><FontAwesomeIcon icon={faTrash }></FontAwesomeIcon></button> : null}
+                  <button style={{ position: "absolute", right: 4, top: 4 }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ?
                       <FontAwesomeIcon icon={faX}></FontAwesomeIcon> :
                       <FontAwesomeIcon icon={faHandPointer}></FontAwesomeIcon>}</button>
                   
