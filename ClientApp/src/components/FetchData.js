@@ -3,7 +3,6 @@ import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faTrash, faX, faTrashArrowUp, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { timeout } from 'workbox-core/_private';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -16,7 +15,8 @@ export class FetchData extends Component {
   }
 
   componentDidMount() {
-    this.populateNotesData();
+      this.populateNotesData();
+      console.log(this.props)
   }
 
 
@@ -131,7 +131,7 @@ export class FetchData extends Component {
     }
 
 
-  render() {
+    render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
       : this.renderNotesTable(this.state.forecasts);

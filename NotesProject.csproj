@@ -35,6 +35,8 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\Class.cs" />
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="WeatherForecast.cs" />
   </ItemGroup>
 
   <ItemGroup>

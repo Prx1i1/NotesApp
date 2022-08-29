@@ -14,7 +14,7 @@ const AppRoutes = [
   },
   {
     path: '/fetch-data',
-    element: <FetchData />
+      element: <FetchData />
    },
    {
        path: '/trash',
