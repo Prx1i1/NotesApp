@@ -67,7 +67,7 @@ class NoteComponent extends Component {
                 <div className={"notePartTitle", "notePart"} style={{ display: "inline-block", textAlign: "center", fontWeight: "bold" }}>{this.props.title}</div>
                 {this.props.selectionMode == "select" ? <div className="checkbox" style={{ display: "inline-block", float: "right" }}>{this.props.isSelected() ? <FontAwesomeIcon icon={faCheck }></FontAwesomeIcon> : ""}</div> : null}
                 <div className={"notePartContent", "notePart"} style={{ wordWrap: "break-word"} }>{this.props.content}</div>
-                <div className={"notePartDate", "notePart"} style={{ textAlign: "right" }}>{this.handleDateFormat()}</div>
+                <div className={"notePartDate", "notePart"} style={{ textAlign: "right", bottom: 0 }}>{this.handleDateFormat()}</div>
             </div>    
         )
     }
