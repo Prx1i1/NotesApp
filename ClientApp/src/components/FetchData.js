@@ -150,16 +150,15 @@ export class FetchData extends Component {
               {currentPopup}
               <div style={{ height: 12 }}></div> {/*this is margin*/}
             <h1 >My Notes</h1>
-            <p>All notes stored online</p>
-            <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>
+            <p>All your notes in one place</p>
+{/*            <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>*/}
               <div className="mainButtons" style={{ display: "flex" } }>
                   {/*<button style={{ flex: 1}} onClick={() => this.createNotePopup()}>Create New Note</button>*/}
-                  <button style={{ flex: 1 }} onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>
-                  {/*<button style={{ float: "right" }} onClick={() => this.handleChangeDisplay(this.state.display)}>View {this.state.display == "default" ? "trash" : "notes" }</button>*/}
-                  <input style={{ flex: 1 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
-                  <button style={{flex:1, float: "right" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>
+                  {/*<button style={{ flex: 1 }} onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>*/}
+                  <input style={{ flex: 2 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
+                  {/*<button style={{flex:1, float: "right" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>*/}
                   {this.state.selectionMode == "select" ? <button style={{ float: "right", flex: 1 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}>Delete Selected</button> : null}
-                  <button style={{ flex: 1, float: "right" }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ? "Cancel" : "Select"}</button>
+                  <button style={{ flex: this.state.selectionMode == "select" ? 1 : 2, float: "right" }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ? "Cancel" : "Select"}</button>
                   
                   {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
             </div>
