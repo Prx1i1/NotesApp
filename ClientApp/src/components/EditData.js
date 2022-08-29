@@ -56,7 +56,7 @@ export const EditData = (props) => {
                 <>
                     <div hidden={!props.visibility} className="blackPage" style={{ opacity: 0.5, width: "100%", height: "100%", backgroundColor: "black", position: "fixed", top: 0, left: 0 }}>
                     </div>
-                    <div hidden={!props.visibility} className="popup" style={{ opacity: 1, padding: 0, position: "fixed", backgroundColor: "#B2BEB5", width: "70%", height: "80%", margin: "auto", left: "calc((100% - 70%) / 2)" }}>
+                    <div hidden={!props.visibility} className="popup" style={{ opacity: 1, padding: 0, position: "fixed", backgroundColor: "aliceblue", width: "70%", height: "80%", margin: "auto", left: "calc((100% - 70%) / 2)" }}>
 
                         <div style={{ marginTop: 5 }} ref={refTitle} contentEditable suppressContentEditableWarning={true} className="title">{props.title}</div>
 
@@ -65,10 +65,10 @@ export const EditData = (props) => {
                         <div ref={refContent} contentEditable suppressContentEditableWarning={true} className="content">{props.content}</div>
 
                         <hr />
-
-                        <div ref={refDate} className="date">{props.id !== "new" ? "Creation date: " : null }{props.date}</div>
-                        <div ref={refEditDate} className="date">{ props.editDate != null? "Last edit date:" : null} { props.editDate}</div>
-
+                            <div style={{width:"100%", margin: 0, position: "absolute", bottom: 20} }>
+                            <div ref={refDate} className="date">{props.id !== "new" ? "Creation date: " : null }{props.date}</div>
+                            <div ref={refEditDate} className="date">{ props.editDate != null? "Last edit date:" : null} { props.editDate}</div>
+                        </div>
                         <div style={{ width: "100%", margin: 0, position: "absolute", bottom: "0px", display: "flex", flex: 1, background: "transparent" }}>
                             <button className="buttonLeft buttonLeftClose buttonClose" style={{ flex: 1 }} onClick={() => handleEdit()}>{props.id != "new" ? "Update" : "Add"}</button>
                             { props.id != "new" ? <button className="buttonCenter buttonClose" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>: null}

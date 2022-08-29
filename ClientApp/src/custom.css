@@ -114,5 +114,7 @@ button {
 .mainButtons button, .mainButtons input {
     margin: 0 5px;
 }
-
+.sideBar{
+    border: 1px solid gray;
+}
 
