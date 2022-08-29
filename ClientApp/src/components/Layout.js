@@ -9,7 +9,7 @@ export class Layout extends Component {
   render() {
     return (
       <div className="mainBody">
-        <NavMenu />
+            <NavMenu toggleMenu={this.props.toggleMenu}/>
         <Container>
           {this.props.children}
         </Container>

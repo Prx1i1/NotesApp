@@ -10,8 +10,6 @@ export class FetchData extends Component {
   constructor(props) {
     super(props);
       this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2, selectedNotes: [], selectionMode: "default" };
-      //this.deleteNote = this.deleteNote.bind(this)
-      //this.handleChangeMode = this.handleChangeMode(this)
   }
 
   componentDidMount() {
@@ -145,6 +143,7 @@ export class FetchData extends Component {
       return (
 
           <div>
+
               <style>{mode ? ":root { background-color: red; }" : "body { background-color: inherit; }"}</style>
               <button className="addNote" onClick={() => this.createNotePopup()}><FontAwesomeIcon style={{ position: 'relative', left: 10, bottom: 10, fontSize: 32}} icon={faPlus}></FontAwesomeIcon></button>
               {currentPopup}
