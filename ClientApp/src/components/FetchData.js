@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faTrash, faX, faTrashArrowUp, faBan, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faTrash, faX, faTrashArrowUp, faBan, faPlus, faHandPointer } from '@fortawesome/free-solid-svg-icons'
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -152,13 +152,15 @@ export class FetchData extends Component {
             <h1 >My Notes</h1>
             <p>All your notes in one place</p>
 {/*            <p onClick={() => this.handleChangeMode()}>Current mode: {mode ? "delete" : "view"}</p>*/}
-              <div className="mainButtons" style={{ display: "flex" } }>
+              <div className="mainButtons" style={{ }}>
                   {/*<button style={{ flex: 1}} onClick={() => this.createNotePopup()}>Create New Note</button>*/}
                   {/*<button style={{ flex: 1 }} onClick={() => this.handleChangeLayout(this.state.minWidth)} style={{ marginLeft: "5px" }}>Change Layout ({ this.state.layout + 1}/5)</button>*/}
                   <input style={{ flex: 2 }} type="text" className="search" onChange={(e) => this.handleSearch(e)} />
                   {/*<button style={{flex:1, float: "right" }} onClick={() => this.handleChangeMode()}><abbr title={"Switch between view and delete modes"}><FontAwesomeIcon icon={!mode ? faTrash : faX} /></abbr></button>*/}
-                  {this.state.selectionMode == "select" ? <button style={{ float: "right", flex: 1 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}>Delete Selected</button> : null}
-                  <button style={{ flex: this.state.selectionMode == "select" ? 1 : 2, float: "right" }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ? "Cancel" : "Select"}</button>
+                  {this.state.selectionMode == "select" ? <button style={{ position: "absolute", right: 30 }} onClick={() => this.handleDeleteSelected(this.state.selectedNotes)}><FontAwesomeIcon icon={faTrash }></FontAwesomeIcon></button> : null}
+                  <button style={{ position: "absolute", right: 0 }} onClick={() => this.toggleNotesSelection()}>{this.state.selectionMode === "select" ?
+                      <FontAwesomeIcon icon={faX}></FontAwesomeIcon> :
+                      <FontAwesomeIcon icon={faHandPointer}></FontAwesomeIcon>}</button>
                   
                   {/* <button style={{ float: "right" }} onClick={() => this.handleDeleteMode(this.state.deleteMode)}> <abbr title={"Switch between permanent deletion and moving to trash"}> <FontAwesomeIcon icon={ this.state.deleteMode === "temporary" ? faTrashArrowUp : faBan }/> </abbr> </button>*/}
             </div>
@@ -174,6 +176,7 @@ export class FetchData extends Component {
             this.deleteNoteComplex(i, false)
             console.log("deleting note id", i)
         })
+        this.setState({ selectedNotes: [] })
     }
 
     async handleChangeLayout(layoutValue) {

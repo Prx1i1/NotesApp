@@ -110,10 +110,16 @@ button {
     background-color: inherit;
     right: 0;
 }
+.mainButtons{
+    width: 100%;
+    position: relative;
 
-.mainButtons button, .mainButtons input {
-    margin: 0 5px;
 }
+
+.mainButtons input {
+    width: 100%;
+}
+
 .sideBar{
     border: 1px solid gray;
 }
