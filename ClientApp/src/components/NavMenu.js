@@ -17,6 +17,11 @@ export class NavMenu extends Component {
     };
   }
 
+    toggleMenuHandler() {
+        this.props.toggleMenu()
+        this.props.update()
+    }
+
   toggleNavbar () {
     this.setState({
       collapsed: !this.state.collapsed
@@ -27,7 +32,7 @@ export class NavMenu extends Component {
     return (
       <header>
           <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-0" container light>
-          <button onClick={()=>this.props.toggleMenu()}><FontAwesomeIcon icon={faBars}></FontAwesomeIcon></button>
+          <button onClick={()=>this.toggleMenuHandler()}><FontAwesomeIcon icon={faBars}></FontAwesomeIcon></button>
           <NavbarBrand className="mx-2" tag={Link} to="/">NotesProject</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>

@@ -143,7 +143,8 @@ export class FetchData extends Component {
       return (
 
           <div>
-
+              {this.props.isMenuVisible() ? <div className="sideBar" style={{ position: "absolute", left: 0, height: "100%", width: "30%"} }></div> : null}
+              
               <style>{mode ? ":root { background-color: red; }" : "body { background-color: inherit; }"}</style>
               <button className="addNote" onClick={() => this.createNotePopup()}><FontAwesomeIcon style={{ position: 'relative', left: 10, bottom: 10, fontSize: 32}} icon={faPlus}></FontAwesomeIcon></button>
               {currentPopup}

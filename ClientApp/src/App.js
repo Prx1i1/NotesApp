@@ -9,19 +9,19 @@ import { Home } from "./components/Home";
 import { Trash } from './components/Trash';
 
 
-
-
 export default class App extends Component {
   
+    static displayName = App.name;
 
-    constructor(props) {
-        super(props)
-        this.state = { isMenuVisible: false }
+    constructor() {
+        super()
+        this.state = { isMenuVisible: false, dummy: 0 }
         console.log(this.state)
     }
 
-
-    static displayName = App.name;
+    update = () => {
+        this.setState({dummy : this.state.dummy + 1})
+    }
 
     toggleMenu = () => {
         console.log("a top level function", this.state)
@@ -31,7 +31,8 @@ export default class App extends Component {
     }
 
     getMenuState = () => {
-        return this.state.isMenuVisible
+
+       return this.state.isMenuVisible
     }
 
     AppRoutes = [
@@ -53,11 +54,32 @@ export default class App extends Component {
         }
     ];
 
-  render() {
+    getAppRoutes() {
+        return [{
+            index: true,
+            element: <Home />
+        },
+            {
+                path: '/counter',
+                element: <Counter />
+            },
+            {
+                path: '/fetch-data',
+                element: <FetchData toggleMenu={this.toggleMenu} isMenuVisible={this.getMenuState} />
+            },
+            {
+                path: '/trash',
+                element: <Trash />
+            }]
+    }
+
+    render() {
+      let appRoutes = this.getAppRoutes()
     return (
-        <Layout toggleMenu={this.toggleMenu }>
+        <Layout toggleMenu={this.toggleMenu} isMenuVisible={this.state.isMenuVisible} update={this.update}>
+            {this.getMenuState()}
         <Routes>
-          {this.AppRoutes.map((route, index) => {
+          {appRoutes.map((route, index) => {
             const { element, ...rest } = route;
               return <Route key={index} {...rest} element={element} />;
           })}
