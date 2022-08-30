@@ -13,5 +13,7 @@
         public DateTime? EditDate { get; set; }
 
         public bool ToDelete { get; set; }
+
+        public string? Tags { get; set; }
     }
 }

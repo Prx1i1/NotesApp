@@ -82,14 +82,14 @@ export class FetchData extends Component {
 
     }
 
-    storePopupData = (id, title, content, date, toDelete, editDate) => {
-        this.setState({ popupId: id, popupTitle: title, popupContent: content, popupDate: date, popupToDelete: toDelete, popupEditDate: editDate })
+    storePopupData = (id, title, content, date, toDelete, editDate, tags) => {
+        this.setState({ popupId: id, popupTitle: title, popupContent: content, popupDate: date, popupToDelete: toDelete, popupEditDate: editDate, popupTags: tags })
 
         console.log(this.state)
     }
 
     clearPopupData = () => {
-        this.setState({ popupId: null, popupTitle: null, popupContent: null, popupDate: null, popupToDelete: null, popupEditDate: null })
+        this.setState({ popupId: null, popupTitle: null, popupContent: null, popupDate: null, popupToDelete: null, popupEditDate: null, popupTags: null })
 
         console.log(this.state)
     }
@@ -136,7 +136,7 @@ export class FetchData extends Component {
 
     let mode = this.state.mode
 
-      let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate }
+        let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate} tags={this.state.popupTags }
           visibility={this.state.popupId !== undefined && this.state.popupId !== null ? true : false} clearPopup={this.clearPopupData}
           restartData={this.clearPopupUpdate} deleteThisNote={() => this.deleteNoteComplex(this.state.popupId, this.state.popupToDelete)} />
 

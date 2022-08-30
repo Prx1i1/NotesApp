@@ -142,8 +142,8 @@ export const Trash = () => {
         renderNotesTable()
     }
 
-    let currentPopup = <EditData id={popupId} title={popupTitle} content={popupContent} date={popupDate} toDelete={popupToDelete} deleteThisNote={() => (deleteNoteComplex(popupId, popupToDelete)) }
-        visibility={popupId !== undefined && popupId !== null ? true : false} clearPopup={clearPopupData} restartData={clearPopupUpdate} />
+    let currentPopup = <EditData id={popupId} title={popupTitle} content={popupContent} date={popupDate} toDelete={popupToDelete} deleteThisNote={() => (deleteNoteComplex(popupId, popupToDelete))}
+        visibility={popupId !== undefined && popupId !== null ? true : false} clearPopup={clearPopupData} restartData={clearPopupUpdate} removeThisNote={deleteNote} /> 
     let contents = loading ? <p>Loading...</p> : renderNotesTable()
 
     return (
