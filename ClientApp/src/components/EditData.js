@@ -1,14 +1,13 @@
 ﻿import React, { useEffect, useState } from 'react';
+
 //wyświetl jedną notatkę (get id), contenteditable = true, dodatkowe przyciski wracajace na poprzednią podstrone (bonus punkty za komponent funkcyjny)
 
 export const EditData = (props) => {
 
-
     useEffect(() => { 
         console.log("component loaded")
-        }, [])
+    }, [])
 
-    const [Tags, setTags] = useState(props.tags)
 
     const refTitle = React.useRef();
     const refContent = React.useRef();
@@ -26,13 +25,13 @@ export const EditData = (props) => {
 
         if (props.id == "new") {
              console.log("creator")
-            let body = { title: refTitle.current?.innerText, content: refContent.current?.innerText, toDelete: false, editDate: null, tags: Tags }
+            let body = { title: refTitle.current?.innerText, content: refContent.current?.innerText, toDelete: false, editDate: null }
             const response = await fetch('api/Notes', { headers: { "Content-Type": "application/json" }, method: "POST", body: JSON.stringify(body) })
             console.log(response)
 
         } else {
             console.log("editor")
-            let body = { id: props.id, title: refTitle.current?.innerText, content: refContent.current?.innerText, tags: Tags}
+            let body = { id: props.id, title: refTitle.current?.innerText, content: refContent.current?.innerText}
             console.log(body)
             const response = await fetch('api/Notes/', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
             console.log(response)
@@ -59,15 +58,6 @@ export const EditData = (props) => {
 
     }
 
-    const handleAddTag = () => {
-        if (Tags != null) {
-            setTags([...Tags, refInput.current?.value])
-        } else {
-            setTags([refInput.current?.value])
-        }
-
-        refInput.current.value = null
-    }
 
     return props.visibility ? (
 
@@ -88,8 +78,8 @@ export const EditData = (props) => {
                         <hr />
                         {/*tags*/}
                         <div style={{ width: "100%", margin: 0}}>
-                            <input type="text" ref={refInput} /> <button onClick={() => handleAddTag() }>Add tag</button>
-                            {Tags}
+                            <input type="text" ref={refInput} /> <button onClick={() => props.addTags(refInput.current?.value) }>Add tag</button>
+                            {props.tags}
                         </div>
 
                         {/*dates*/}
@@ -101,7 +91,7 @@ export const EditData = (props) => {
                             <button className="buttonLeft buttonLeftClose buttonClose" style={{ flex: 1 }} onClick={() => handleEdit()}>{props.id != "new" ? "Update" : "Add"}</button>
                             { props.id != "new" ? <button className="buttonCenter buttonClose" style={{ flex: 1 }} onClick={() => handleDeleteNote()}>{props.toDelete ? "Restore" : "Delete"}</button>: null}
                             {props.toDelete ? <button className="buttonCenter buttonClose" onClick={() => handleRemoveNote()} style={{ flex: 1 }}>Remove</button> : null}
-                            <button className="buttonRight buttonRightClose buttonClose" style={{ flex: 1 }} onClick={() => props.clearPopup()}>Cancel</button>
+                            <button className="buttonRight buttonRightClose buttonClose" style={{ flex: 1 }} onClick={() => cleanPopup()}>Cancel</button>
                     
                         </div>
 

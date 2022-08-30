@@ -19,26 +19,26 @@ namespace NotesProject.Controllers
 
             var returnedData = await _context.Notes.ToListAsync();
 
-            if (mode == "default"){
+            if (mode == "default") {
                 returnedData = returnedData.FindAll(n => n.ToDelete == false);
                 returnedData.Sort((a, b) => a.Date.CompareTo(b.Date));
                 returnedData.Reverse(); //new to old
-                
+
             }
             else {
                 returnedData = returnedData.FindAll(n => n.ToDelete != false);
             }
-            return Ok(returnedData);  
+            return Ok(returnedData);
         }
 
         [HttpGet("search/{mode}/{text}", Name = "getSearched")]
 
-        public async Task<ActionResult<List<Note>>> GetSearched (string mode, string text)
+        public async Task<ActionResult<List<Note>>> GetSearched(string mode, string text)
         {
             var returnedData = await _context.Notes.ToListAsync();
             returnedData = returnedData.FindAll(n => n.Title.ToLower().Contains(text.ToLower()) || n.Content.ToLower().Contains(text.ToLower()));
             bool modeDisplay = false;
-            if(mode == "deleted")
+            if (mode == "deleted")
             {
                 modeDisplay = true;
             }
@@ -61,7 +61,7 @@ namespace NotesProject.Controllers
         {
 
             note.Date = DateTime.Now;
-            if(note.Title == null && note.Content == null)
+            if (note.Title == null && note.Content == null)
             {
                 return BadRequest("double null value");
             }
@@ -90,6 +90,21 @@ namespace NotesProject.Controllers
 
             await _context.SaveChangesAsync();
 
+
+            return Ok(await _context.Notes.ToListAsync());
+        }
+
+        [HttpPut("tags" ,Name = "editTags")]
+
+        public async Task<ActionResult<List<Note>>> UpdateNoteTags(Note request)
+        {
+            var noteDB = await _context.Notes.FindAsync(request.Id);
+            if (noteDB == null) { return BadRequest("Target resource not found"); }
+
+            //update parameters of note tags
+            noteDB.Tags = request.Tags;
+
+            await _context.SaveChangesAsync();
 
             return Ok(await _context.Notes.ToListAsync());
         }

@@ -9,7 +9,7 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2, selectedNotes: [], selectionMode: "default" };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2, selectedNotes: [], popupTags: [], selectionMode: "default" };
   }
 
   componentDidMount() {
@@ -21,11 +21,35 @@ export class FetchData extends Component {
 
     renderNotesTable(forecasts) {
         return (
-            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode} editDate={note.editDate }
+            forecasts.map(note => (<NoteComponent key={note.id} id={note.id} title={note.title} content={note.content} date={note.date} toDeletion={note.toDelete} deleteMode={this.state.deleteMode} editDate={note.editDate} tags={note.tags }
                 onClick={() => this.deleteNote(note.id)} mode={this.state.mode} storePopup={this.storePopupData} onClickComplex={() => this.deleteNoteComplex(note.id, note.toDeletion)} minWidth={this.state.minWidth}
                 selectionMode={this.state.selectionMode} select={() => this.handleSelectNote(note.id)} allSelectedNotes={this.state.selectedNotes} isSelected={() => this.isSelected(note.id) } />))
     );
     }
+
+    handleAddTag = (input) => {
+
+        console.log("add tags")
+
+        try {
+            this.setState({ popupTags: [...this.state.popupTags, input] })
+            this.fetchModifyTag([...this.state.popupTags, input])
+        } catch {
+            this.setState({ popupTags: [input]})
+            this.fetchModifyTag([input])
+        }
+
+
+    }
+
+    async fetchModifyTag(tags) {
+ 
+        let body = { id: this.state.popupId, title: this.state.popupTitle, content: this.state.popupContent, toDelete: false, editDate: null, tags: JSON.stringify(tags) }
+        console.log(body)
+        const response = await fetch('api/Notes/tags', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
+        console.log(response)
+    }
+
 
     isSelected(id) {
 
@@ -89,7 +113,7 @@ export class FetchData extends Component {
     }
 
     clearPopupData = () => {
-        this.setState({ popupId: null, popupTitle: null, popupContent: null, popupDate: null, popupToDelete: null, popupEditDate: null, popupTags: null })
+        this.setState({ popupId: null, popupTitle: null, popupContent: null, popupDate: null, popupToDelete: null, popupEditDate: null, popupTags: [] })
 
         console.log(this.state)
     }
@@ -136,8 +160,8 @@ export class FetchData extends Component {
 
     let mode = this.state.mode
 
-        let currentPopup = <EditData id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate} tags={this.state.popupTags }
-          visibility={this.state.popupId !== undefined && this.state.popupId !== null ? true : false} clearPopup={this.clearPopupData}
+        let currentPopup = <EditData addTags={this.handleAddTag}  id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate} tags={this.state.popupTags }
+            visibility={this.state.popupId !== undefined && this.state.popupId !== null ? true : false} clearPopup={this.clearPopupData} addTag={() => this.addTag(this.state.popupId) }
           restartData={this.clearPopupUpdate} deleteThisNote={() => this.deleteNoteComplex(this.state.popupId, this.state.popupToDelete)} />
 
       return (
