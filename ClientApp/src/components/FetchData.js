@@ -42,7 +42,15 @@ export class FetchData extends Component {
             this.setState({ popupTags: [input] })
             this.fetchModifyTag([input])
         }
+    }
 
+    handleRemoveTag = (id) => {
+
+        let source = this.state.popupTags
+        source.splice(id, 1)
+       
+        this.setState({ popupTags: source })
+        this.fetchModifyTag(source)
 
     }
 
@@ -165,7 +173,7 @@ export class FetchData extends Component {
 
     let mode = this.state.mode
 
-        let currentPopup = <EditData addTags={this.handleAddTag}  id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate} tags={this.state.popupTags }
+        let currentPopup = <EditData addTags={this.handleAddTag} removeTags={this.handleRemoveTag}  id={this.state.popupId} title={this.state.popupTitle} content={this.state.popupContent} date={this.state.popupDate} toDelete={this.state.popupToDelete} editDate={this.state.popupEditDate} tags={this.state.popupTags }
             visibility={this.state.popupId !== undefined && this.state.popupId !== null ? true : false} clearPopup={this.clearPopupData} addTag={() => this.addTag(this.state.popupId) }
           restartData={this.clearPopupUpdate} deleteThisNote={() => this.deleteNoteComplex(this.state.popupId, this.state.popupToDelete)} />
 

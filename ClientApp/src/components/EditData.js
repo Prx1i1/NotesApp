@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
+import { displayPartsToString } from 'typescript';
 
 //wyświetl jedną notatkę (get id), contenteditable = true, dodatkowe przyciski wracajace na poprzednią podstrone (bonus punkty za komponent funkcyjny)
 
@@ -58,6 +59,19 @@ export const EditData = (props) => {
 
     }
 
+    function displayTags() {
+
+        if (props.tags === undefined || props.tags === null) {
+            console.log("nullundef")
+            return null
+        }
+
+        return props.tags.map((i, j) => (
+            <div style={{ display: "inline" }} onClick={() => props.removeTags(j) } key={j }>{i}</div>
+        ))
+
+        
+    }
 
     return props.visibility ? (
 
@@ -79,7 +93,7 @@ export const EditData = (props) => {
                         {/*tags*/}
                         <div style={{ width: "100%", margin: 0}}>
                             <input type="text" ref={refInput} /> <button onClick={() => props.addTags(refInput.current?.value) }>Add tag</button>
-                            {props.tags}
+                            {displayTags()}
                         </div>
 
                         {/*dates*/}
