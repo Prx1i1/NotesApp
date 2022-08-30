@@ -30,12 +30,16 @@ export class FetchData extends Component {
     handleAddTag = (input) => {
 
         console.log("add tags")
+        console.log(this.state.popupTags, input)
 
-        try {
-            this.setState({ popupTags: [...this.state.popupTags, input] })
-            this.fetchModifyTag([...this.state.popupTags, input])
-        } catch {
-            this.setState({ popupTags: [input]})
+        if (this.state.popupTags !== null) {
+            let source = [...this.state.popupTags, input]
+            console.log(source)
+            console.log(JSON.stringify({ tags: source }))
+            this.setState({ popupTags: source })
+            this.fetchModifyTag(source)
+        } else {
+            this.setState({ popupTags: [input] })
             this.fetchModifyTag([input])
         }
 
@@ -43,9 +47,10 @@ export class FetchData extends Component {
     }
 
     async fetchModifyTag(tags) {
- 
-        let body = { id: this.state.popupId, title: this.state.popupTitle, content: this.state.popupContent, toDelete: false, editDate: null, tags: JSON.stringify(tags) }
-        console.log(body)
+
+        console.log(tags)
+        let body = { id: this.state.popupId, "title": null, "content": null, tags: JSON.stringify(tags) }
+        console.log(JSON.stringify(body))
         const response = await fetch('api/Notes/tags', { headers: { "Content-Type": "application/json" }, method: "PUT", body: JSON.stringify(body) });
         console.log(response)
     }
@@ -256,7 +261,7 @@ export class FetchData extends Component {
       console.log(response)
       const data = await response.json();
       console.log(data)
-        this.setState({ forecasts: data, loading: false });
+      this.setState({ forecasts: data, loading: false });
    }
 
     async deleteNote(id) {
