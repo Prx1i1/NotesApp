@@ -1,5 +1,4 @@
 ﻿import React, { useEffect, useState } from 'react';
-import { displayPartsToString } from 'typescript';
 
 //wyświetl jedną notatkę (get id), contenteditable = true, dodatkowe przyciski wracajace na poprzednią podstrone (bonus punkty za komponent funkcyjny)
 
