@@ -3,13 +3,15 @@ import NoteComponent from "./NoteComponent";
 import EditData from "./EditData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faTrash, faX, faTrashArrowUp, faBan, faPlus, faHandPointer } from '@fortawesome/free-solid-svg-icons'
+import { contains } from 'jquery';
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
 
   constructor(props) {
     super(props);
-      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2, selectedNotes: [], popupTags: [], selectionMode: "default" };
+      this.state = { forecasts: [], loading: true, mode: false, restart: 0, display: "default", deleteMode: "temporary", minWidth: "30%", layout: 2, selectedNotes: [], popupTags: [], selectionMode: "default", tagsList: [] };
+      this.tagsCreateRef = React.createRef();
   }
 
   componentDidMount() {
@@ -165,6 +167,15 @@ export class FetchData extends Component {
         this.setState({ forecasts: data, loading: false });
     }
 
+    addTagToList(tagname) {
+        this.setState({ tagsList: [...this.state.tagsList, tagname] })
+        this.tagsCreateRef.current.value = null
+    }
+
+    createTagsList() {
+        return this.state.tagsList.map((i, j) => (<div key={j}>{i}</div>))
+    }
+
 
     render() {
     let contents = this.state.loading
@@ -205,8 +216,10 @@ export class FetchData extends Component {
             {contents}
               </div>
 
-              {this.props.isMenuVisible() ? <div className="sideBar" style={{ position: "absolute", left: 0, top: 50, height: "100%", width: "25%" }}>
-                Sidebar contents
+              {this.props.isMenuVisible() ? <div className="sideBar" style={{ position: "absolute", left: 0, top: 50, height: "100%", width: "25%", padding: 1 }}>
+                  {/*<div style={{ display: "flex", width: "100%", flex: 1 }}> <input ref={this.tagsCreateRef} style={{ flex: 1, width: 'auto' }} type="text" /><button onClick={() => this.addTagToList(this.tagsCreateRef.current?.innerText)} style={{ flex: 1 }}>+</button> </div>*/}
+                  {this.createTagsList()}
+
               </div> : null}
       </div>
       );
@@ -260,6 +273,8 @@ export class FetchData extends Component {
         await this.setState({loading: true})
         await this.populateNotesData()
     }
+
+
     async populateNotesData() {
 
     console.log("fetching data", this.state.display)
@@ -269,8 +284,46 @@ export class FetchData extends Component {
       console.log(response)
       const data = await response.json();
       console.log(data)
-      this.setState({ forecasts: data, loading: false });
-   }
+        await this.setState({ forecasts: data, loading: false })
+        await this.initialTaglist(data)
+        
+
+    }
+
+    async initialTaglist(data) {
+
+        let startingTags = []
+
+        //forecasts table
+        for (let i = 0; i < data.length; i++) {
+            //tags list
+            //for (let j = 0; j < JSON.parse(this.state.forecasts[i].tags).length; j++) {
+            //    console.log(this.state.forecasts[i].tags[j])
+            //}
+            let tempTags = data[i].tags
+            if (tempTags !== null) {
+                tempTags = JSON.parse(tempTags)
+
+                startingTags = startingTags.concat(tempTags)
+            }
+            console.log(tempTags)
+            
+            //console.log(this.state.forecasts[i].tags)
+        }
+
+        console.log(startingTags)
+
+        startingTags.forEach((e, l) => {
+            console.log(startingTags.filter(n => n === e))
+            if (startingTags.filter(n => n === e).length > 1) {
+                startingTags.splice(l, 1)
+            }
+        })
+
+        this.setState({ tagsList: startingTags }) 
+
+
+    }
 
     async deleteNote(id) {
         console.log("clicked")
